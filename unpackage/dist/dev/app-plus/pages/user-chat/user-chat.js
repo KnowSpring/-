@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"user-chat-container.",[1],"data-v-612f58e9 { width: 100%; }\n",],undefined,{path:"./pages/user-chat/user-chat.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/user-chat/user-chat.wxml') } }));

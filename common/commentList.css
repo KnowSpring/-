@@ -1,0 +1,73 @@
+ .comment-list {
+ 		padding: 20upx;
+ 		border-bottom: 1upx solid #EEEEEE;
+ 		background-color: #FFFFFF;
+ 	}
+ 
+ 	.comment-userinfo>view:first-child {
+ 		color: #999999;
+ 	}
+ 
+ 	.comment-userinfo>view:first-child image {
+ 		width: 85upx;
+ 		height: 85upx;
+ 		border-radius: 100%;
+ 		margin-right: 10upx;
+ 	}
+ 
+ 	.comment-userinfo>view:last-child {
+ 		background: #F4F4F4;
+ 		border-radius: 5upx;
+ 		padding: 0 10upx;
+ 	}
+ 
+ 	.comment-title {
+ 		padding-top: 15upx;
+ 		font-size: 32upx;
+ 	}
+ 
+ 	.comment-img {
+ 		position: relative;
+ 		padding-top: 15upx;
+ 	}
+ 
+ 	.comment-img>image {
+ 		width: 100%;
+ 		border-radius: 20upx;
+ 	}
+ 
+ 	.comment-num view {
+ 		color: #999999;
+ 	}
+ 
+ 	.comment-num {
+ 		padding: 15upx 0;
+ 	}
+ 
+ 	.comment-num>view>view>view,
+ 	.comment-num>view>view:first-child {
+ 		margin-right: 10upx;
+ 	}
+ 
+ 	.comment-list-play {
+ 		position: absolute;
+ 		font-size: 140upx;
+ 		color: #FFFFFF;
+ 	}
+ 
+ 	.comment-list-playinfo {
+ 		position: absolute;
+ 		background: rgba(51, 51, 51, 0.72);
+ 		color: #FFFFFF;
+ 		bottom: 8upx;
+ 		right: 8upx;
+ 		border-radius: 40upx;
+ 		font-size: 22upx;
+ 		padding: 0 12upx;
+ 	}
+ 
+ 	.comment-num .active,
+ 	.comment-num .active>view {
+ 		color: #ffff44;
+ 	}
+ 

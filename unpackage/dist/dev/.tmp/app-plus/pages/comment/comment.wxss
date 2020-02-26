@@ -1,0 +1,15 @@
+
+.comment-container.data-v-41adb833 {
+	width: 100%;
+}
+.uni-tab-bar.data-v-41adb833 {
+	background-color: #F7F7F7;
+}
+.shipu-content.data-v-41adb833{
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+}
+.nothing.data-v-41adb833 {
+	font-size: 30rpx;
+}
+

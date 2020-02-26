@@ -1,0 +1,12 @@
+
+.my-data.data-v-b17894a0{ 
+	padding: 20rpx 40rpx;
+}
+.my-data>view.data-v-b17894a0{
+	color: #989898;
+}
+.my-data>view>view.data-v-b17894a0{
+	font-size: 32rpx;
+	color: #333333;
+}
+

@@ -1,0 +1,10 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "详情页",
+  "usingComponents": {
+    "detail-info": "/components/detail-info",
+    "detail-pinglun-list": "/components/detail-pinglun-list",
+    "user-chat-bottom": "/components/user-chat-bottom",
+    "more-share": "/components/common/more-share"
+  }
+}

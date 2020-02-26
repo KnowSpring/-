@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "comment-list": "/components/comment-list",
+    "comment-load": "/components/comment-load",
+    "comment-head": "/components/comment-head"
+  }
+}

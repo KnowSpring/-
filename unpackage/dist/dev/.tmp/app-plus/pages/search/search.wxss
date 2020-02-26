@@ -1,0 +1,48 @@
+
+.search-contaner.data-v-bcc9a71a {
+	width: 100%;
+	background-color: #F4F4F4;
+}
+
+/* 最近搜索 */
+.search-recent.data-v-bcc9a71a {
+	color: #7A7A7A;
+	padding: 50rpx 0 20rpx 30rpx;
+}
+.search-list.data-v-bcc9a71a {
+	height: 100rpx;
+	padding: 0 30rpx;
+	background-color: #FFFFFF;
+	border-bottom: 2rpx solid #F1F1F1;
+}
+.search-list .icon.data-v-bcc9a71a {
+	font-size: 34rpx;
+	margin-right: 20rpx;
+	padding-top: 6rpx;
+	color: #999999;
+}
+.search-list.clear.data-v-bcc9a71a {
+	color: #999999;
+}
+
+/* 建议列 */
+.advise-container.data-v-bcc9a71a {
+	margin-top: 80rpx;
+}
+.red.data-v-bcc9a71a {
+	color: #F01414;
+}
+
+/* 固定行 */
+.advise-fixed.data-v-bcc9a71a {
+	height: 80rpx;
+	padding: 0 30rpx;
+	background-color: #FFFFFF;
+	border-top: 2rpx solid #CCCCCC;
+	border-bottom: 2rpx solid #CCCCCC;
+	position: fixed;
+	top: 90rpx;
+	left: 0;
+	right: 0;
+}
+

@@ -1,0 +1,31 @@
+
+.comment-list-pingce.data-v-2d0fdfbd {
+	position: relative;
+	margin-top: 30rpx;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+	color: #fff;
+	box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+	border-radius: 20rpx;
+	overflow: hidden;
+}
+.comment-list-pingce image.data-v-2d0fdfbd {
+	width: 100%;
+}
+.comment-list-pingce>view.data-v-2d0fdfbd {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 99;
+}
+.comment-list-pingce>view .username.data-v-2d0fdfbd {
+	margin-top: 40rpx;
+}
+.comment-list-pingce>view .title.data-v-2d0fdfbd {
+	font-size: 32rpx;
+	font-weight: bold;
+}
+.comment-list-pingce>view .read.data-v-2d0fdfbd {
+	margin-bottom: 40rpx;
+}
+

@@ -1,0 +1,88 @@
+
+.comment-list.data-v-62d8d6f2 {
+		padding: 20rpx;
+		border-bottom: 1rpx solid #EEEEEE;
+}
+.comment-userinfo>view.data-v-62d8d6f2:first-child {
+		color: #999999;
+}
+.comment-userinfo>view:first-child image.data-v-62d8d6f2 {
+		width: 85rpx;
+		height: 85rpx;
+		border-radius: 100%;
+		margin-right: 10rpx;
+}
+.comment-userinfo>view.data-v-62d8d6f2:last-child {
+		background: #F4F4F4;
+		border-radius: 5rpx;
+		padding: 0 10rpx;
+}
+.comment-title.data-v-62d8d6f2 {
+		padding-top: 15rpx;
+		font-size: 32rpx;
+}
+.comment-img.data-v-62d8d6f2 {
+		position: relative;
+		padding-top: 15rpx;
+}
+.comment-img>image.data-v-62d8d6f2 {
+		width: 100%;
+		border-radius: 20rpx;
+}
+.comment-num view.data-v-62d8d6f2 {
+		color: #999999;
+}
+.comment-num.data-v-62d8d6f2 {
+		padding: 15rpx 0;
+}
+.comment-num>view>view>view.data-v-62d8d6f2,
+	.comment-num>view>view.data-v-62d8d6f2:first-child {
+		margin-right: 10rpx;
+}
+.comment-list-play.data-v-62d8d6f2 {
+		position: absolute;
+		font-size: 140rpx;
+		color: #FFFFFF;
+}
+.comment-list-playinfo.data-v-62d8d6f2 {
+		position: absolute;
+		background: rgba(51, 51, 51, 0.72);
+		color: #FFFFFF;
+		bottom: 8rpx;
+		right: 8rpx;
+		border-radius: 40rpx;
+		font-size: 22rpx;
+		padding: 0 12rpx;
+}
+.comment-num .active.data-v-62d8d6f2,
+	.comment-num .active>view.data-v-62d8d6f2 {
+		color: #ffff44;
+}
+.common-list-l image.data-v-62d8d6f2{
+	 width: 85rpx;
+	 height: 85rpx;
+	 border-radius: 100%;
+	 margin-right: 10rpx;
+}
+.common-list-r.data-v-62d8d6f2{
+	border-bottom: 0;
+}
+.common-list.data-v-62d8d6f2{
+	border-bottom: 1rpx solid #EEEEEE;
+}
+.common-list-r-time.data-v-62d8d6f2{
+	padding: 15rpx 0;
+	color: #CCCCCC!important;
+	font-size: 25rpx;
+	background: #FFFFFF!important;
+}
+.common-list-r>view:nth-child(1)>view:nth-child(1)>view.data-v-62d8d6f2:first-child{
+	color: #999999;
+	font-size: 32rpx;
+}
+.common-list-r>view:nth-child(1)>view:nth-child(1)>view.data-v-62d8d6f2:last-child{
+	background: #EEEEEE;
+	padding: 0 10rpx;
+	font-size: 26rpx;
+}
+

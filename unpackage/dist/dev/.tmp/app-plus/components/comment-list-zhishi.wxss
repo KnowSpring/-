@@ -1,0 +1,20 @@
+
+.comment-list-zhishi.data-v-c061487c {
+	margin-top: 20rpx;
+	padding: 30rpx;
+	background-color: #FFFFFF;
+}
+.comment-list-zhishi-l .l-bottom.data-v-c061487c {
+	color: #898989;
+}
+.comment-list-zhishi-l .readnum.data-v-c061487c {
+	margin-right: 60rpx;
+}
+.comment-list-zhishi-r.data-v-c061487c {
+	width: 30%;
+	margin-left: 60rpx;
+}
+.comment-list-zhishi-r image.data-v-c061487c {
+	width: 100%;
+}
+

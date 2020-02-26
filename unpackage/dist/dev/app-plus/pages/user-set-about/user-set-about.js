@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"body.",[1],"data-v-0d940673 { width: 100%; padding: 0 ",[0,20],"; }\n.",[1],"version.",[1],"data-v-0d940673 { padding: ",[0,20]," 0; }\n",],undefined,{path:"./pages/user-set-about/user-set-about.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/user-set-about/user-set-about.wxml') } }));

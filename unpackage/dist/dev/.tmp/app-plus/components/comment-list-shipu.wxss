@@ -1,0 +1,29 @@
+
+.comment-list-shipu.data-v-8e0dc040 {
+	width: 363rpx;
+	padding: 0 4rpx;
+	margin-top: 20rpx;
+	box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.3);
+	background-color: #FFFFFF;
+	color: #898989;
+}
+.comment-list-shipu image.data-v-8e0dc040 {
+	width: 100%;
+}
+.shipu-bottom.data-v-8e0dc040 {
+	padding: 10rpx 0;
+}
+.shipu-name.data-v-8e0dc040 {
+	width: 100%;
+	border-bottom: 2rpx solid #ccc;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.userinfo image.data-v-8e0dc040 {
+	width: 85rpx;
+	height: 85rpx;
+	border-radius: 100%;
+	margin-right: 10rpx;
+}
+

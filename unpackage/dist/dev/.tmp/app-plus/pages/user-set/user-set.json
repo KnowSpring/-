@@ -1,0 +1,8 @@
+{
+  "animationType": "slide-in-left",
+  "scrollIndicator": "none",
+  "bounce": "none",
+  "usingComponents": {
+    "my-list-item": "/components/my/my-list-item"
+  }
+}

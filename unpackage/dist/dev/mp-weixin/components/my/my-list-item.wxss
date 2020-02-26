@@ -1,0 +1,19 @@
+
+.my-list-item.data-v-ae69a668 {
+	padding: 20rpx;
+	border-top: 1rpx solid #F4F4F4;
+	border-bottom: 1rpx solid #F4F4F4;
+}
+.my-list-item>view.data-v-ae69a668:first-child {
+	color: #333333;
+}
+.my-list-item>view:first-child>view.data-v-ae69a668 {
+	margin-right: 10rpx;
+}
+.my-list-item>view.data-v-ae69a668:last-child {
+	color: #CCCCCC;
+}
+.my-list-hover.data-v-ae69a668 {
+	background: #f4f4f4;
+}
+

@@ -1,0 +1,292 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/intake/intake",
+			"style": {
+				"app-plus": {
+					"scrollIndicator": "none", //隐藏滚动条
+					"titleNView": { //导航栏配置
+						// 搜索框配置
+						"searchInput": {
+							"align": "center",
+							"backgroundColor": "#F7F7F7",
+							"borderRadius": "4px",
+							"placeholder": "请输入食物名称",
+							"placeholderColor": "#CCCCCC",
+							"disabled": true
+						}
+						//配置按钮
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/consume/consume",
+			"style": {
+				"navigationBarTitleText":"分析",
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none" //隐藏滚动条				
+				}
+			}
+		},
+		{
+			"path": "pages/comment/comment",
+			"style": {
+				"enablePullDownRefresh": true, //开启下拉刷新功能
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none", //隐藏滚动条
+					"titleNView": { //导航栏配置
+						// 搜索框配置
+						"searchInput": {
+							"align": "center",
+							"backgroundColor": "#F7F7F7",
+							"borderRadius": "4px",
+							"placeholder": "搜索",
+							"placeholderColor": "#CCCCCC",
+							"disabled": true
+						},
+						//配置按钮
+						"buttons": [
+							// 右边
+							{
+								"color": "#000000",
+								"colorPressed": "#BBBBBB",
+								"float": "right",
+								"fontSize": "22px",
+								"fontSrc": "/static/font/iconfont.ttf",
+								"text": "\uf423"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "我的",
+				"app-plus": {
+					"animationType":"fade-in",
+					"animationDuration": 200,
+					"scrollIndicator": "none",
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+							"type": "menu"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/user-set/user-set",
+			"style": {
+				"app-plus": {
+					"animationType": "slide-in-left", //进场动画
+					"scrollIndicator": "none", //隐藏滚动条
+					"bounce": "none" //关闭反弹效果
+				}
+			}
+		},
+		{
+			"path": "pages/user-set-repassword/user-set-repassword",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user-set-email/user-set-email",
+			"style": {
+				"navigationBarTitleText": "修改邮箱",
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user-set-userinfo/user-set-userinfo",
+			"style": {
+				"navigationBarTitleText": "修改资料",
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		}, {
+			"path": "pages/user-set-help/user-set-help",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user-set-about/user-set-about",
+			"style": {
+				"navigationBarTitleText": "关于健身美食",
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"app-plus": {
+					"scrollIndicator": "none", //隐藏滚动条
+					"titleNView": { //导航栏配置
+						// 搜索框配置
+						"searchInput": {
+							"autoFocus": true,
+							"align": "left",
+							"backgroundColor": "#F7F7F7",
+							"borderRadius": "4px",
+							"titleSize": "15px",
+							"placeholder": "搜索",
+							"placeholderColor": "#CCCCCC",
+							"disabled": false
+						},
+						"buttons": [
+							// 右边
+							{
+								"color": "#000000",
+								"colorPressed": "#BBBBBB",
+								"float": "right",
+								"fontSize": "15px",
+								"text": "搜索"
+							}
+
+						]
+
+					}
+				}
+
+			}
+		}, {
+			"path": "pages/add-post/add-post",
+			"style": {
+				"app-plus": {
+					"animationType":"slide-in-bottom",
+					"animationDuration": 200,
+					"bounce": "none",
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/comment-detail/comment-detail",
+			"style": {
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "详情页",
+				"app-plus": {
+					"animationType":"fade-in",
+					"animationDuration": 200,
+					"scrollIndicator": "none", //隐藏滚动条,
+					"bounce": "none",
+					"titleNView": {
+						"buttons": [{
+							"type": "menu"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"app-plus": {
+					"titleNView": false,
+					"bounce": "none",
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/user-space/user-space",
+			"style": {
+				"navigationBarTitleText": "个人空间",
+				"app-plus": {
+					"scrollIndicator": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+							"type": "menu"
+						}]
+					}
+				}
+			}
+		}
+        ,{
+            "path" : "pages/paper/paper",
+            "style" : {
+				"navigationBarTitleText":"小纸条"
+			}
+        }
+        ,{
+            "path" : "pages/user-chat/user-chat",
+            "style" : {
+				"navigationBarTitleText":"聊天页"
+			}
+        }
+        ,{
+            "path" : "pages/food-detail/food-detail",
+            "style" : {
+				"navigationBarTitleText":"详情页",
+				"navigationBarBackgroundColor": "#fff"
+			}
+        }
+        ,{
+            "path" : "pages/consume-sport/consume-sport",
+            "style" : {
+				"navigationBarTitleText":"运动页",
+				"navigationBarBackgroundColor": "#fff"
+			}
+        }
+        ,{
+            "path" : "pages/comment-article/comment-article",
+            "style" : {}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#000",
+		"selectedColor": "#1196db",
+		"borderStyle": "black",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/intake/intake",
+				"text": "食物",
+				"iconPath": "static/tabBarPic/ru.png",
+				"selectedIconPath": "static/tabBarPic/ruActive.png"
+			},
+			{
+				"pagePath": "pages/consume/consume",
+				"text": "分析",
+				"iconPath": "static/tabBarPic/hao.png",
+				"selectedIconPath": "static/tabBarPic/haoActive.png"
+			},
+			{
+				"pagePath": "pages/comment/comment",
+				"text": "逛逛",
+				"iconPath": "static/tabBarPic/guang.png",
+				"selectedIconPath": "static/tabBarPic/guangActive.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/tabBarPic/my.png",
+				"selectedIconPath": "static/tabBarPic/myActive.png"
+			}
+		]
+	}
+}

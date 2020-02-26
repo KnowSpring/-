@@ -1,0 +1,33 @@
+{
+  "enablePullDownRefresh": true,
+  "bounce": "none",
+  "scrollIndicator": "none",
+  "titleNView": {
+    "searchInput": {
+      "align": "center",
+      "backgroundColor": "#F7F7F7",
+      "borderRadius": "4px",
+      "placeholder": "搜索",
+      "placeholderColor": "#CCCCCC",
+      "disabled": true
+    },
+    "buttons": [
+      {
+        "color": "#000000",
+        "colorPressed": "#BBBBBB",
+        "float": "right",
+        "fontSize": "22px",
+        "fontSrc": "/static/font/iconfont.ttf",
+        "text": ""
+      }
+    ]
+  },
+  "usingComponents": {
+    "comment-list-fenxiang": "/components/comment-list-fenxiang",
+    "comment-list-pingce": "/components/comment-list-pingce",
+    "comment-list-zhishi": "/components/comment-list-zhishi",
+    "comment-list-shipu": "/components/comment-list-shipu",
+    "comment-load": "/components/comment-load",
+    "comment-head": "/components/comment-head"
+  }
+}

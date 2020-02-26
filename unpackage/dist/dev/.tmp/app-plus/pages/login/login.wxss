@@ -1,0 +1,94 @@
+/* 公共按钮 */
+.user-set-btn.data-v-bd3a6a72{
+	width: 100%;
+	margin: 20rpx 0;
+	border: 0!important;
+}
+.user-set-btn-disable.data-v-bd3a6a72{
+	background: #F4F4F4!important;
+	border: 1rpx solid #EEEEEE!important;
+	color: #909090!important;
+}
+.body.data-v-bd3a6a72{
+	width: 100%;
+	padding: 0 20rpx!important;
+}
+.common-input.data-v-bd3a6a72{
+	font-size: 30rpx;
+	border-bottom: 1rpx solid #F4F4F4;
+}
+.login-font-color.data-v-bd3a6a72 {
+	color: #BBBBBB;
+}
+.login-padding.data-v-bd3a6a72 {
+	padding: 20rpx 0;
+}
+.guanbi-icon.data-v-bd3a6a72 {
+	position: fixed;
+	top: 60rpx;
+	left: 30rpx;
+	font-size: 40rpx;
+	font-weight: bold;
+	color: #332F0A;
+	z-index: 9999;
+}
+.loginhead.data-v-bd3a6a72 {
+	width: 100%;
+}
+.other-login-title.data-v-bd3a6a72 {
+	position: relative;
+}
+/* 左右增加横线，横线中间 */
+.other-login-title.data-v-bd3a6a72:before,
+.other-login-title.data-v-bd3a6a72:after {
+	content: '';
+	position: absolute;
+	background: #BBBBBB;
+	height: 1rpx;
+	width: 100rpx;
+	top: 50%;
+}
+.other-login-title.data-v-bd3a6a72:before {
+	left: 25%;
+}
+.other-login-title.data-v-bd3a6a72:after {
+	right: 25%;
+}
+.login-input-box.data-v-bd3a6a72 {
+	position: relative;
+}
+.login-input-box .forget-input.data-v-bd3a6a72 {
+	padding-right: 150rpx;
+}
+.login-input-box .forget.data-v-bd3a6a72,
+.login-input-box .phone.data-v-bd3a6a72 {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	z-index: 100;
+}
+.login-input-box .forget.data-v-bd3a6a72 {
+	width: 150rpx;
+	right: 0;
+}
+.login-input-box .phone.data-v-bd3a6a72 {
+	width: 100rpx;
+	left: 0;
+	font-weight: bold;
+}
+.login-input-box .phone-input.data-v-bd3a6a72 {
+	padding-left: 100rpx;
+}
+.yanzhengma view.data-v-bd3a6a72 {
+	background-color: #489BCB;
+	color: #FFFFFF;
+	border-radius: 10rpx;
+	font-size: 25rpx;
+	width: 200rpx;
+	padding: 10rpx 0;
+}
+.yanzhengma .disabled.data-v-bd3a6a72 {
+	background-color: #EEEEEE;
+	color: #BBBBBB;
+}
+

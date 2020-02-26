@@ -1,0 +1,30 @@
+
+.body.data-v-987e6dda{
+	background-color: #F4F4F4;
+}
+.detail-header.data-v-987e6dda {
+	height: 200rpx;
+	padding: 0 30rpx;
+	border-bottom: 2rpx solid #ccc;
+}
+.img.data-v-987e6dda {
+	margin-right: 30rpx;
+}
+.img image.data-v-987e6dda {
+	width: 150rpx;
+	height: 150rpx;
+	border-radius: 100%;
+}
+.energy.data-v-987e6dda {
+	letter-spacing: 2rpx;
+}
+.red.data-v-987e6dda{
+	color:#F01414;
+}
+.green.data-v-987e6dda{
+	color:#09BB07;
+}
+.orange.data-v-987e6dda{
+	color:#F0AD4E;
+}
+

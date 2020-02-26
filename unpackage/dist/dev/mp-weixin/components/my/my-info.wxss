@@ -1,0 +1,22 @@
+
+.my-info {
+	padding: 20rpx 40rpx;
+}
+.my-info>image {
+	-webkit-flex-shrink: 0;
+	        flex-shrink: 0;
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 100%;
+	margin-right: 15rpx;
+}
+.my-info>view:first-of-type>view:first-child {
+	font-size: 32rpx;
+}
+.my-info>view:first-of-type>view:last-child {
+	color: #BBBBBB;
+}
+.my-info>view:last-of-type {
+	height: 100%;
+}
+

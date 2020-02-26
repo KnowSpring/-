@@ -1,0 +1,11 @@
+
+.my-title{
+	padding: 20rpx 0;
+}
+.my-container{
+	width: 100%;
+}
+.my-list {
+	padding: 20rpx;
+}
+

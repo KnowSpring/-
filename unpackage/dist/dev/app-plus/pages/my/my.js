@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"my-title { padding: ",[0,20]," 0; }\n.",[1],"my-container { width: 100%; }\n.",[1],"my-list { padding: ",[0,20],"; }\n",],undefined,{path:"./pages/my/my.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/my/my.wxml') } }));

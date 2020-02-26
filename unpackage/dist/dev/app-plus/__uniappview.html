@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8" />
+        <script>
+            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+                CSS.supports('top: constant(a)'))
+            document.write(
+                '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+                (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+        </script>
+        <title>View</title>
+        <style>
+            * {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            input[type="search"]::-webkit-search-cancel-button {
+                display: none;
+            }
+        </style>
+        <script>
+            var __wxConfig = {"debug":false,"appname":"sportDiet","entryPagePath":"pages/intake/intake.html","page":{"pages/intake/intake.html":{"window":{"scrollIndicator":"none","titleNView":{"searchInput":{"align":"center","backgroundColor":"#F7F7F7","borderRadius":"4px","placeholder":"请输入食物名称","placeholderColor":"#CCCCCC","disabled":true}},"usingComponents":{"shopcart":"/components/shopcart","cartcontrol":"/components/cartcontrol"}}},"pages/consume/consume.html":{"window":{"navigationBarTitleText":"分析","bounce":"none","scrollIndicator":"none","usingComponents":{"uchart-line":"/components/uchart-line"}}},"pages/comment/comment.html":{"window":{"enablePullDownRefresh":true,"bounce":"none","scrollIndicator":"none","titleNView":{"searchInput":{"align":"center","backgroundColor":"#F7F7F7","borderRadius":"4px","placeholder":"搜索","placeholderColor":"#CCCCCC","disabled":true},"buttons":[{"color":"#000000","colorPressed":"#BBBBBB","float":"right","fontSize":"22px","fontSrc":"/static/font/iconfont.ttf","text":""}]},"usingComponents":{"comment-list-fenxiang":"/components/comment-list-fenxiang","comment-list-pingce":"/components/comment-list-pingce","comment-list-zhishi":"/components/comment-list-zhishi","comment-list-shipu":"/components/comment-list-shipu","comment-load":"/components/comment-load","comment-head":"/components/comment-head"}}},"pages/my/my.html":{"window":{"navigationBarBackgroundColor":"#fff","navigationBarTitleText":"我的","animationType":"fade-in","animationDuration":200,"scrollIndicator":"none","bounce":"none","titleNView":{"buttons":[{"type":"menu"}]},"usingComponents":{"my-info":"/components/my/my-info","my-list-item":"/components/my/my-list-item","other-login":"/components/my/other-login"}}},"pages/user-set/user-set.html":{"window":{"animationType":"slide-in-left","scrollIndicator":"none","bounce":"none","usingComponents":{"my-list-item":"/components/my/my-list-item"}}},"pages/user-set-repassword/user-set-repassword.html":{"window":{"navigationBarTitleText":"修改密码","scrollIndicator":"none","usingComponents":{}}},"pages/user-set-email/user-set-email.html":{"window":{"navigationBarTitleText":"修改邮箱","scrollIndicator":"none","usingComponents":{}}},"pages/user-set-userinfo/user-set-userinfo.html":{"window":{"navigationBarTitleText":"修改资料","scrollIndicator":"none","usingComponents":{"simple-address":"/components/simple-address/simple-address"}}},"pages/user-set-help/user-set-help.html":{"window":{"navigationBarTitleText":"意见反馈","scrollIndicator":"none","usingComponents":{"uni-collapse":"/components/uni-collapse/uni-collapse","uni-collapse-item":"/components/uni-collapse-item/uni-collapse-item"}}},"pages/user-set-about/user-set-about.html":{"window":{"navigationBarTitleText":"关于健身美食","scrollIndicator":"none","usingComponents":{"home-list-item":"/components/my/my-list-item"}}},"pages/search/search.html":{"window":{"scrollIndicator":"none","titleNView":{"searchInput":{"autoFocus":true,"align":"left","backgroundColor":"#F7F7F7","borderRadius":"4px","titleSize":"15px","placeholder":"搜索","placeholderColor":"#CCCCCC","disabled":false},"buttons":[{"color":"#000000","colorPressed":"#BBBBBB","float":"right","fontSize":"15px","text":"搜索"}]},"usingComponents":{"food-header":"/components/food/food-header"}}},"pages/add-post/add-post.html":{"window":{"animationType":"slide-in-bottom","animationDuration":200,"bounce":"none","titleNView":false,"usingComponents":{"uni-nav-bar":"/components/uni-nav-bar/uni-nav-bar","uni-popup":"/components/uni-popup/uni-popup"}}},"pages/comment-detail/comment-detail.html":{"window":{"navigationBarBackgroundColor":"#fff","navigationBarTitleText":"详情页","animationType":"fade-in","animationDuration":200,"scrollIndicator":"none","bounce":"none","titleNView":{"buttons":[{"type":"menu"}]},"usingComponents":{"detail-info":"/components/detail-info","detail-pinglun-list":"/components/detail-pinglun-list","user-chat-bottom":"/components/user-chat/user-chat-bottom","more-share":"/components/common/more-share"}}},"pages/login/login.html":{"window":{"titleNView":false,"bounce":"none","scrollIndicator":"none","usingComponents":{"uni-status-bar":"/components/uni-status-bar/uni-status-bar","other-login":"/components/my/other-login"}}},"pages/user-space/user-space.html":{"window":{"navigationBarTitleText":"个人空间","scrollIndicator":"none","titleNView":{"type":"transparent","buttons":[{"type":"menu"}]},"usingComponents":{"tag-sex-age":"/components/common/tag-sex-age","my-data":"/components/my/my-data","user-space-info":"/components/user-space/user-space-info","user-space-popup":"/components/user-space/user-space-popup"}}},"pages/paper/paper.html":{"window":{"navigationBarTitleText":"小纸条","usingComponents":{"paper-list":"/components/paper/paper-list"}}},"pages/user-chat/user-chat.html":{"window":{"navigationBarTitleText":"聊天页","usingComponents":{"user-chat-bottom":"/components/user-chat/user-chat-bottom","user-chat-list":"/components/user-chat/user-chat-list"}}},"pages/food-detail/food-detail.html":{"window":{"navigationBarTitleText":"详情页","navigationBarBackgroundColor":"#fff","usingComponents":{}}},"pages/consume-sport/consume-sport.html":{"window":{"navigationBarTitleText":"运动页","navigationBarBackgroundColor":"#fff","usingComponents":{}}},"pages/comment-article/comment-article.html":{"window":{"usingComponents":{}}}},"global":{"window":{"navigationBarTextStyle":"black","navigationBarTitleText":"","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"}},"tabBar":{"color":"#000","selectedColor":"#1196db","backgroundColor":"#FFFFFF","borderStyle":"black","list":[{"pagePath":"pages/intake/intake.html","text":"食物","iconPath":"static/tabBarPic/ru.png","selectedIconPath":"static/tabBarPic/ruActive.png"},{"pagePath":"pages/consume/consume.html","text":"分析","iconPath":"static/tabBarPic/hao.png","selectedIconPath":"static/tabBarPic/haoActive.png"},{"pagePath":"pages/comment/comment.html","text":"逛逛","iconPath":"static/tabBarPic/guang.png","selectedIconPath":"static/tabBarPic/guangActive.png"},{"pagePath":"pages/my/my.html","text":"我的","iconPath":"static/tabBarPic/my.png","selectedIconPath":"static/tabBarPic/myActive.png"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/intake/intake","pages/consume/consume","pages/comment/comment","pages/my/my","pages/user-set/user-set","pages/user-set-repassword/user-set-repassword","pages/user-set-email/user-set-email","pages/user-set-userinfo/user-set-userinfo","pages/user-set-help/user-set-help","pages/user-set-about/user-set-about","pages/search/search","pages/add-post/add-post","pages/comment-detail/comment-detail","pages/login/login","pages/user-space/user-space","pages/paper/paper","pages/user-chat/user-chat","pages/food-detail/food-detail","pages/consume-sport/consume-sport","pages/comment-article/comment-article"],"nvueCompiler":"uni-app","renderer":"auto","splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"compilerVersion":"2.4.6","usingComponents":{}}
+        </script>
+        <script>
+            var __id__ = '';
+            window.__dispatchGenerateFunc__ = function(page) {
+                __id__ = page;
+                document.title = page;
+                // window.history.pushState('', '', page);
+                var wxss = page.replace('.html', '.wxss')
+                if (
+                    typeof __wxAppCode__ !== 'undefined' &&
+                    __wxAppCode__.hasOwnProperty(wxss)
+                ) {
+                    var setCssToHead = __wxAppCode__[wxss]
+                    typeof setCssToHead === 'function' && setCssToHead()
+                    document.dispatchEvent(new CustomEvent("generateFuncReady", {
+                        detail: {
+                            generateFunc: $gwx(page.replace('.html', '.wxml'))
+                        }
+                    }));
+                } else {
+                    plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+                }
+            };
+        </script>
+        <script src="__uniappes6.js"></script>
+        <script src="uniapp://ready"></script>
+    </head>
+
+    <body>
+        <div></div>
+    </body>
+
+</html>

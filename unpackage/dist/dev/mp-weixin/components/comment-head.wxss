@@ -1,0 +1,20 @@
+
+.uni-swiper-tab.data-v-27173514 {
+	border-bottom: 1rpx solid #eee;
+}
+.swiper-tab-list.data-v-27173514 {
+	color: #969696;
+	font-weight: bold;
+}
+.uni-swiper-tab .active.data-v-27173514 {
+	color: #343434;
+}
+
+/* 激活才有小蓝线 */
+.active .swiper-tab-line.data-v-27173514 {
+	border-bottom: 6rpx solid #007AFF;
+	border-radius: 20rpx;
+	margin: auto;
+	width: 70rpx;
+}
+

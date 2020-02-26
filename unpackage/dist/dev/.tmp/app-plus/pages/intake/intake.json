@@ -1,0 +1,17 @@
+{
+  "scrollIndicator": "none",
+  "titleNView": {
+    "searchInput": {
+      "align": "center",
+      "backgroundColor": "#F7F7F7",
+      "borderRadius": "4px",
+      "placeholder": "请输入食物名称",
+      "placeholderColor": "#CCCCCC",
+      "disabled": true
+    }
+  },
+  "usingComponents": {
+    "shopcart": "/components/shopcart",
+    "cartcontrol": "/components/cartcontrol"
+  }
+}

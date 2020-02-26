@@ -1,0 +1,18 @@
+{
+  "navigationBarTitleText": "个人空间",
+  "scrollIndicator": "none",
+  "titleNView": {
+    "type": "transparent",
+    "buttons": [
+      {
+        "type": "menu"
+      }
+    ]
+  },
+  "usingComponents": {
+    "tag-sex-age": "/components/common/tag-sex-age",
+    "my-data": "/components/my/my-data",
+    "user-space-info": "/components/user-space/user-space-info",
+    "user-space-popup": "/components/user-space/user-space-popup"
+  }
+}

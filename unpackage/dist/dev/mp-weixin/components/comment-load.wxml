@@ -1,0 +1,1 @@
+<view class="load-more">{{loadMoreTip}}</view>

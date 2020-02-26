@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "my-info": "/components/my/my-info",
+    "my-list-item": "/components/my/my-list-item",
+    "other-login": "/components/my/other-login"
+  }
+}

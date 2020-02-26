@@ -1,0 +1,20 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "我的",
+  "animationType": "fade-in",
+  "animationDuration": 200,
+  "scrollIndicator": "none",
+  "bounce": "none",
+  "titleNView": {
+    "buttons": [
+      {
+        "type": "menu"
+      }
+    ]
+  },
+  "usingComponents": {
+    "my-info": "/components/my/my-info",
+    "my-list-item": "/components/my/my-list-item",
+    "other-login": "/components/my/other-login"
+  }
+}

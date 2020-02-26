@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"detail-content.",[1],"data-v-f98176da { padding-top: ",[0,20],"; }\n.",[1],"u-pinglun.",[1],"data-v-f98176da { padding: 0 ",[0,20],"; }\n.",[1],"u-pinglun-title.",[1],"data-v-f98176da { padding: ",[0,20],"; font-size: ",[0,30],"; font-weight: bold; }\n",],undefined,{path:"./pages/comment-detail/comment-detail.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/comment-detail/comment-detail.wxml') } }));

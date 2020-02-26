@@ -1,0 +1,41 @@
+
+.sport-container.data-v-185ad18a {
+	width: 100%;
+	background-color: #F4F4F4;
+	margin-bottom: 140rpx;
+}
+.user-set-userinfo-list.data-v-185ad18a {
+	padding: 30rpx;
+	margin-top: 10rpx;
+	background-color: #FFFFFF;
+}
+.user-set-userinfo-list>view.data-v-185ad18a:first-child {
+	font-size: 32rpx;
+	font-weight: 600;
+	color: #353535;
+}
+.red.data-v-185ad18a {
+	color: #F01414;
+	font-size: 30rpx;
+	margin-right: 4rpx;
+}
+.number.data-v-185ad18a {
+	width: 100rpx;
+	text-align: right;
+}
+
+/* 固定行 */
+.advise-fixed.data-v-185ad18a {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 140rpx;
+	padding: 0 30rpx;
+	background-color: #FFFFFF;
+	border-top: 2rpx solid #CCCCCC;
+	border-bottom: 2rpx solid #CCCCCC;
+	font-size: 32rpx;
+	font-weight: 700
+}
+

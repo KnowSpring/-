@@ -1,0 +1,34 @@
+
+.consume-container.data-v-25558d26 {
+	width: 100%;
+	background-color: #F4F4F4;
+}
+.consume-base.data-v-25558d26,
+.consume-day.data-v-25558d26,
+.consume-curve.data-v-25558d26,
+.consume-sport.data-v-25558d26 {
+	margin: 30rpx;
+	background-color: #FFFFFF;
+	border-radius: 20rpx;
+	box-shadow: 0 2rpx 4rpx 0rpx;
+}
+.consume-base.data-v-25558d26 {
+	height: 360rpx;
+}
+.consume-title.data-v-25558d26 {
+	padding: 30rpx 30rpx 0 30rpx;
+	font-weight: 700;
+}
+.consume-list.data-v-25558d26 {
+	margin: 0 30rpx;
+}
+.consume-list-item.data-v-25558d26 {
+	border-bottom: 2rpx dashed #CCCCCC;
+	height: 80rpx;
+}
+
+/* 进度条 记录一天需求 */
+.consume-day .consume-list-item.data-v-25558d26:last-child {
+	border-bottom: none;
+}
+

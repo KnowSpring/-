@@ -1,0 +1,55 @@
+
+.food-detail-container {
+	width: 100%;
+	background-color: #F4F4F4;
+	color: #3A3A3A;
+}
+
+/* 头部 */
+.detail-header {
+	height: 200rpx;
+	padding: 0 30rpx;
+	background-color: #FFFFFF;
+	border-top: 2rpx solid #ccc;
+}
+.detail-header .img {
+	margin-right: 30rpx;
+}
+.img image {
+	width: 150rpx;
+	height: 150rpx;
+	border-radius: 100%;
+}
+.detail-header .energy {
+	letter-spacing: 2rpx;
+}
+
+/* 中部表格 */
+.detail-middle,
+.detail-footer {
+	margin-top: 30rpx;
+	padding: 20rpx 30rpx;
+	background-color: #FFFFFF;
+}
+.middle-th,
+.middle-col {
+	height: 100rpx;
+	border-bottom: 2rpx solid #F1F1F1;
+}
+.middle-th {
+	color: #A1A1A1;
+}
+.middle-col view:last-child {
+	color: #F5737D;
+}
+
+/* 尾部 */
+.foot-advise{
+	color:#09BB07;
+	width: 100rpx;
+	padding-right: 30rpx;
+}
+.foot-advise .icon{
+	margin-right: 6rpx;
+}
+

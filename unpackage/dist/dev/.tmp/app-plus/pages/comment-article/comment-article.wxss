@@ -1,0 +1,59 @@
+
+.article-contain.data-v-2969e785 {
+	width: 100%;
+	padding: 30rpx;
+}
+.article-title.data-v-2969e785 {
+	font-size: 46rpx;
+	color: #323232;
+}
+.article-info.data-v-2969e785 {
+	color: #555;
+	font-size: 30rpx;
+	margin-right: 60rpx;
+}
+.article-content.data-v-2969e785 {
+	font-size: 40rpx;
+	color: #323232;
+	line-height: 1.5;
+	margin-bottom: 24rpx;
+}
+.article-content ._img.data-v-2969e785 {
+	max-width: 100%;
+}
+/****点赞 喜欢按钮****/
+.btn-love.data-v-2969e785,.btn-fav.data-v-2969e785  {
+	padding: 0 24rpx;
+	height: 86.4rpx;
+	border: 1px solid #aaa;
+	color: #333;
+	border-radius: 24rpx;
+	font-size: 33.6rpx;
+}
+.btn-love.data-v-2969e785{
+	margin-right: 40rpx;
+}
+.btn-love.data-v-2969e785:before,.btn-fav.data-v-2969e785:before {
+	font-family: iconfont;
+	font-size: 33.6rpx;
+	margin-right: 7.2rpx;
+}
+.btn-love.data-v-2969e785:before{
+	content: "\E780";
+}
+.btn-fav.data-v-2969e785:before {
+	content: "\E780";
+}
+.btn-love-active.data-v-2969e785 {
+	color: #f30;
+}
+.btn-love-active.data-v-2969e785:before {
+	color: #f30;
+}
+.btn-fav-active.data-v-2969e785 {
+	color: #f30;
+}
+.btn-fav-active.data-v-2969e785:before {
+	color: #f30;
+}
+

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "分析",
+  "bounce": "none",
+  "scrollIndicator": "none",
+  "usingComponents": {
+    "uchart-line": "/components/uchart-line"
+  }
+}

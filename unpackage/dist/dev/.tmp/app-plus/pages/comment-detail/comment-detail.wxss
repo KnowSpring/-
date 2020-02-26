@@ -1,0 +1,13 @@
+
+.detail-content.data-v-f98176da {
+	padding-top: 20rpx;
+}
+.u-pinglun.data-v-f98176da {
+	padding: 0 20rpx;
+}
+.u-pinglun-title.data-v-f98176da {
+	padding: 20rpx;
+	font-size: 30rpx;
+	font-weight: bold;
+}
+

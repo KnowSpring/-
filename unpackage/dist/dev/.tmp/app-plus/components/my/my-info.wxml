@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['ToUserSpace',['$event']]]]]}}" class="my-info u-f-ac" bindtap="__e"><image src="{{myinfo.userpic}}" mode="widthFix" lazy-load></image><view class="u-f1"><view>{{myinfo.username}}</view><view>{{"摄入量 "+myinfo.totalget+" 消耗量 "+myinfo.totallost}}</view></view><view class="icon iconfont icon-arrow-right"></view></view>
