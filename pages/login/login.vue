@@ -38,9 +38,9 @@
 			{{status?'账户密码':'验证码'}}登录<view class="icon iconfont icon-arrow-right login-font-color"></view>
 		</view>
 
-		<!-- 第三方登陆 -->
-		<view class="other-login-title u-f-ajc login-padding login-font-color">第三方登录</view>
-		<other-login></other-login>
+		<!-- 第三方登陆暂时不用 -->
+		<!-- <view class="other-login-title u-f-ajc login-padding login-font-color">第三方登录</view>
+		<other-login></other-login> -->
 
 		<!-- 协议 -->
 		<view class="login-rule u-f-ajc login-padding login-font-color">
@@ -51,11 +51,11 @@
 
 <script>
 	import uniStatusBar from "../../components/uni-status-bar/uni-status-bar.vue";
-	import otherLogin from "../../components/my/other-login.vue";
+	// import otherLogin from "../../components/my/other-login.vue";
 	export default {
 		components: {
 			uniStatusBar,
-			otherLogin
+			// otherLogin
 		},
 		data() {
 			return {

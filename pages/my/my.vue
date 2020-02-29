@@ -32,7 +32,7 @@
 	export default {
 		data() {
 			return {
-				islogin: true,//默认要为false
+				islogin: false,//默认要为false
 				myinfo: {
 					userpic: "../../static/userpic/1.jpg",
 					username: "昵称",

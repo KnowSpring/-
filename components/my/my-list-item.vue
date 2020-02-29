@@ -4,7 +4,7 @@
 			<view class="icon iconfont" :class="['icon-'+item.icon]"  v-if="item.icon"></view>
 			{{item.name}}
 		</view>
-		<view class="icon iconfont icon-arrow-right"></view>
+		<view class="icon iconfont" :class="{'icon-arrow-right':!item.data}">{{item.data||''}}</view>
 	</view>
 </template>
 

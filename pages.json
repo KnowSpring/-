@@ -251,6 +251,18 @@
             "path" : "pages/comment-article/comment-article",
             "style" : {}
         }
+        ,{
+            "path" : "pages/user-safety/user-safety",
+            "style" : {
+				"navigationBarTitleText":"账户与安全"
+			}
+        }
+        ,{
+            "path" : "pages/user-set-password/user-set-password",
+            "style" : {
+					"navigationBarTitleText":"设置密码"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

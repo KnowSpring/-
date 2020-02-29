@@ -5,20 +5,22 @@
 			<view class="carIcon">
 				<view class="iconBox" :class="getAllCount ? 'active' : '' ">
 					<text class="allcount" v-if="getAllCount">{{getAllCount}}</text>
-					<image src="/static/cart.png" mode="" class="img"></image>
+					<view class="icon iconfont icon-add-cart u-f-ajc"></view>
 				</view>
 			</view>
 			<view class="middle">
-				<text class="price" :class="getAllCount ?　'active': ''">￥{{getAllPrice}}</text>
-				<text class="deliveryPrice" style="font-size: 12px;">免配送费|支持自取</text>
+				<text class="total" :class="getAllCount ?　'active': ''">热量： <text class="red"> {{getAllPrice}} kcal  </text></text>
+				<view class="u-f u-f-jsb"><text>蛋白质： kkg</text><text>脂肪： kkg</text></view>
+				<view class="u-f u-f-jsb"><text>碳水：kkg</text><text>维生素： kkg</text></view>
+
 			</view>
-			<view class="BtnRight">
-				<text></text>
+			<view class="BtnRight u-f-ac">
+				<button class="u-f-ajc" :class="getAllCount ?　'active': ''" @tap.stop="toTotal">结算</button>
 			</view>
 		</view>
 		<!-- 选择的商品 -->
 		<view class="cartList" v-show="isShowList && getList.length">
-			<scroll-view scroll-y style="max-height: 200px;">
+			<scroll-view scroll-y style="max-height: 300px;">
 				<view class="title">
 					<text>购物车</text>
 					<view class="clear" @click="delShopcart">
@@ -28,7 +30,7 @@
 				<view class="list">
 					<view class="list-text" v-for="(item,index) in getList" :key="index">
 						<text style="flex:1">{{item.name}}</text>
-						<text style="flex:1">￥{{item.price}}</text>
+						<text style="flex:1">{{item.price}} kcal</text>
 						<cartcontrol :food="item" @add="addCart" @dec="decreaseCart"></cartcontrol>
 					</view>
 				</view>
@@ -93,6 +95,10 @@
 			}
 		},
 		methods: {
+			// 结算
+			toTotal() {
+				console.log('结算')
+			},
 			// 解决浮点数 运算出现多位小数
 			accMul(arg1, arg2) {
 				let m = 0,
@@ -112,7 +118,7 @@
 
 				return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m);
 			},
-		
+
 
 			toggleList() {
 				console.log('tog')
@@ -145,7 +151,7 @@
 		bottom: 100upx;
 		left: 0;
 		right: 0;
-		height: 54px;
+		height: 160upx;
 		z-index: 99;
 		display: flex;
 		background-color: #141d27;
@@ -157,20 +163,20 @@
 
 	.iconBox {
 		position: absolute;
-		bottom: 22px;
-		left: 18px;
+		bottom: 88upx;
+		left: 36upx;
 		z-index: 101;
 		background-color: rgb(70, 73, 75);
 		border-radius: 50%;
-		height: 48px;
-		width: 48px;
+		height: 120upx;
+		width: 120upx;
 		line-height: 55px;
 		/* border: 6px solid #141d27; */
 	}
 
 	.iconBox .allcount {
 		position: absolute;
-		right: -6px;
+		right: 0;
 		top: 0;
 		display: inline-block;
 		padding: 0 6px;
@@ -180,6 +186,11 @@
 		border-radius: 10px;
 		background-color: #f01414;
 		color: #ffffff;
+	}
+
+	.iconBox .icon-add-cart {
+		font-size: 68upx;
+		font-weight: 700;
 	}
 
 	.img {
@@ -194,7 +205,7 @@
 	}
 
 	.carIcon .active {
-		background-color: #00a0dc;
+		background-color: #FC982C;
 	}
 
 	.middle {
@@ -202,10 +213,31 @@
 		flex-direction: column;
 		flex: 2;
 		color: #ffffff;
+		margin-right: 30upx;
+		;
+	}
+
+	.middle .total {
+		font-size: 34upx;
+		font-weight: 600;
+	}
+
+	.middle .total .red {
+		color: #f01414;
 	}
 
 	.BtnRight {
 		flex: 1;
+	}
+
+	.BtnRight button {
+		width: 130upx;
+		height: 80upx
+	}
+
+	.BtnRight .active {
+		background-color: #FC982C;
+		font-weight: 600;
 	}
 
 	.cartList {
@@ -225,17 +257,17 @@
 	.cartList .title {
 		background: #F3F5F7;
 		justify-content: space-between;
-		padding: 4px 8px;
+		padding: 8upx 16upx;
 	}
 
 	.cartList .list-text {
-		padding: 10px 6px 10px 8px;
+		padding: 20upx 12upx 20upx 16upx;
 		text-align: center;
 	}
 
 	.list {
 		background: #F8F8F8;
-		padding-bottom: 10px;
+		padding-bottom: 60upx;
 	}
 
 

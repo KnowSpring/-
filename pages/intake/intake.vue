@@ -25,15 +25,20 @@
 							{{item.name}}
 						</view>
 						<view class="food u-f" v-for="(food, index) in item.foods" :key="index" @tap="openDetail(food)">
-							<image :src="food.img" mode="" style="width: 75px;height: 75px;margin-top: 6px;"></image>
+							<image :src="food.img" mode="" style="width: 75px;height: 75px;margin-top: 6px; border-radius: 10%;"></image>
 							<view class="food-info u-f">
-								<text>{{food.name}}</text>
-								<text>{{food.description}}</text>
-								<text>月售{{food.sellCount}}</text>
+								<view class='u-f u-f-jsb'>
+									<view class="u-f-ac">蛋白质：11g</view>
+									<view class="u-f-ac">脂肪： 23g</view>
+								</view>
 
+								<view class='u-f u-f-jsb'>
+									<view class="u-f-ac">碳水：11g</view>
+									<view class="u-f-ac">纤维素： 23g</view>
+								</view>
 								<!-- 加减 -->
-								<view class="u-f u-f-jsb">
-									<text class="food-price">￥{{food.price}}</text>
+								<view class="u-f u-f-jsb food-kcal">
+									<view >热量： <text class="food-price">222 kcal</text></view>
 									<cartcontrol :food="food" @add="addCart" @dec="decreaseCart"></cartcontrol>
 
 								</view>
@@ -374,7 +379,7 @@
 		onNavigationBarSearchInputClicked() {
 			uni.navigateTo({
 				url: '../search/search'
-		
+
 			})
 		},
 		computed: {
@@ -435,10 +440,10 @@
 
 			},
 			// 进入详情页
-			openDetail(food){
-			  uni.navigateTo({
-			  	 url: "../food-detail/food-detail?itemData="+JSON.stringify(food)
-			  })
+			openDetail(food) {
+				uni.navigateTo({
+					url: "../food-detail/food-detail?itemData=" + JSON.stringify(food)
+				})
 			},
 			getHeightList() {
 				let _this = this;
@@ -466,14 +471,14 @@
 			},
 			myscroll(e) {
 				//引入节流
-					console.log( 'e.detail.scrollHeight'+e.detail.scrollHeight)
+				console.log('e.detail.scrollHeight' + e.detail.scrollHeight)
 				let right_content_height = e.detail.scrollHeight - this.windows_height;
 				if (right_content_height == e.detail.scrollTop) {
 					return;
 				}
 				// +1弥补单位差
-				let scroll_top = e.detail.scrollTop +1;
-				console.log('e.detail.scrollTop'+e.detail.scrollTop)
+				let scroll_top = e.detail.scrollTop + 1;
+				console.log('e.detail.scrollTop' + e.detail.scrollTop)
 				//判断当前的scrollTop在哪个区间内;
 				let now = +new Date();
 				if (now - this.last > 100) {
@@ -567,11 +572,12 @@
 
 	// 左边
 	.left-wrapper {
-		width: 200upx;
-		margin-bottom: 140upx;
-		flex: 0 0 200upx;
+		width: 170upx;
+		margin-bottom: 180upx;
+		/* flex: 0 0 200upx; */
 		background-color: #f4f4f4;
 	}
+
 
 	.left-content .title-content {
 		width: 100%;
@@ -604,8 +610,15 @@
 	// 右边
 	.right-content {
 		width: 100%;
-		/* padding: 20upx 0; */
+		padding-left:20upx;
 		border-left: 1upx solid #E4E4E4;
+		box-sizing: border-box;
+		/* 加入底部 */
+		margin-bottom:180upx;
+
+	}
+	.food{
+		margin-bottom: 20upx;
 		box-sizing: border-box;
 	}
 
@@ -616,13 +629,17 @@
 	.food-info {
 		margin-left: 20upx;
 		margin-right: 32upx;
-		display: flex;
 		flex-direction: column;
 		flex: 2;
+		box-sizing: border-box;
 	}
 
 	.food-price {
 		color: #f01414;
 		font-size: 16px;
+		font-weight: 600;
+	}
+	.food-kcal{
+		margin-top:10upx;
 	}
 </style>

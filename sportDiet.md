@@ -262,3 +262,5 @@ var ext = filePath.substr(index+1);
 //输出结果
 console.log(ext);
 ```
+### forEach 遇到await 
+忽略priomse
