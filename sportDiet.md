@@ -21,6 +21,8 @@ view:nth-child()  view:nth-of-type(）
 ### class 
 age > 10 ? class1:class2  {class3 :  条件}  
 this.isshow = !this.isshow
+class="{'icon-arrow-right':!item.data}">{{item.data||''}}
+data:this.User.userinfo.email || "未绑定"
 ### block
 <block  v-show="isshow"></block>
 计算属性加 100kg
@@ -263,4 +265,11 @@ var ext = filePath.substr(index+1);
 console.log(ext);
 ```
 ### forEach 遇到await 
-忽略priomse
+忽略priomse,改用for of
+#### 空格 
+	地址栏传参传不过，id后多了空格	url: '../../pages/user-space/user-space?id ='+this.$store.state.userinfo.currentid
+### null
+Cannot read property 'replace' of undefined 覆盖时可能有些值没有为null
+### 报错
+Uncaught (in promise) TypeError: undefined is not iterable! [err,data]解构不成功
+未授权问题在options.header.token 改为 options.header.Authorization

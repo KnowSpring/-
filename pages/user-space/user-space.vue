@@ -12,7 +12,8 @@
 					<tag-sex-age :sex="userinfo.sex" :age="userinfo.age">
 					</tag-sex-age>
 				</view>
-				<view class="user-space-head-btn user-space-margin" :class="[userinfo.isguanzhu?'active':'']" @tap.stop="guanzhu">{{userinfo.isguanzhu?'已关注':'+关注'}}</view>
+				<view v-show="!isme" class="user-space-head-btn user-space-margin" :class="[userinfo.isguanzhu?'active':'']"
+				 @tap.stop="guanzhu">{{userinfo.isguanzhu?'已关注':'+关注'}}</view>
 			</view>
 		</view>、
 		<!-- 总数据 -->
@@ -41,33 +42,22 @@
 		},
 		data() {
 			return {
+				isme: false,
 				show: false, //操作表单显隐
 				userinfo: {
 					bgimg: 1,
 					userpic: "../../static/userpic/1.jpg",
 					username: "昵称",
 					sex: 0,
-					age: 20,
+					age: 0,
 					isguanzhu: false,
-					regtime: "2019-04-11",
-					id: 1213,
+					regtime: "2020-04-11",
+					userid: 1213,
 					birthday: "1998-01-01",
 					job: "IT",
 					path: "广东广州"
 				},
-				spacedata: [{
-						name: "体重/kg",
-						num: 66
-					},
-					{
-						name: "消耗/cal",
-						num: 11
-					},
-					{
-						name: "摄入/cal",
-						num: 12
-					}
-				]
+				spacedata: []
 
 			}
 		},
@@ -77,11 +67,74 @@
 			}
 		},
 		onNavigationBarButtonTap(e) {
-			if(e.index === 0){
+			if (e.index === 0) {
 				this.togleShow()
 			}
 		},
+		onLoad(e) {
+			this.initInfo(e)
+		},
 		methods: {
+			initInfo(e) {
+				// 获取用户信息
+				this.getUserInfo(e)
+				// 初始化总数据
+				this.spacedata = [{
+						type: 1,
+						name: "基础代谢",
+						num: this.userinfo.baseconsume || 0
+					},
+					{
+						type: 2,
+						name: "基础蛋白",
+						num: this.userinfo.baseprotein || 0
+					},
+					{
+						type: 1,
+						name: "运动代谢",
+						num: this.userinfo.sportconsume || 0
+					},
+					{
+						type: 2,
+						name: "运动蛋白",
+						num: this.userinfo.sportprotein || 0
+					}
+				]
+
+			},
+			async getUserInfo(e) {
+				// 从我的进入
+				if (e.user_id == this.$store.state.userinfo.currentid) {
+					console.log(this.$store.state.userinfo)
+					this.userinfo = JSON.parse(JSON.stringify(this.$store.state.userinfo))
+					// 小坑固定背景图
+					this.userinfo.bgimg = 1
+					console.log(this.userinfo)
+					this.isme = true;
+					return;
+				}
+				// 表示从分享页面过来 传过来的是对象，包括姓名，昵称,use_id
+				let info = JSON.parse(e.info)
+				if (info && Object.prototype.toString.call(info) === '[object Object]') {
+					// 我
+					if (info.user_id == this.$store.state.userinfo.currentid) {
+						this.userinfo = JSON.parse(JSON.stringify(this.$store.state.userinfo))
+						// 小坑固定背景图
+						this.userinfo.bgimg = 1
+						console.log(this.userinfo)
+						this.isme = true;
+						return;
+					}
+					// 其他人
+					let userid = info.user_id;
+					let [err, res] = await this.$http.get(`/users/${userid}`)
+					Object.assign(this.userinfo, res.data.info, info)
+					this.userinfo.bgimg = 1
+					console.log(this.userinfo)
+					this.isme = false;
+				}
+
+			},
 			// 操作菜单显示隐藏
 			togleShow() {
 				this.show = !this.show;

@@ -3,7 +3,7 @@
 		<view class="comment-list animated fadeIn fast">
 			<view class="comment-userinfo u-f-ac u-f-jsb">
 				<view class="u-f-ac">
-					<image :src="postItem.userpic" mode="widthFix" lazy-load></image>
+					<image :src="postItem.userpic" mode="widthFix" lazy-load @tap="toUserSpace(postItem.id)"></image>
 					{{postItem.username}}
 				</view>
 				<view class="u-f-ac" v-show="!postItem.isguanzhu" @tap="guanzhu">
@@ -29,7 +29,7 @@
 						{{postItem.infonum.dingnum}}
 					</view>
 					<view class="u-f-ac" :class="{'active':(postItem.infonum.commentDo==2)}" @tap="zanCai('cai')">
-						<view class="icon iconfont icon-bad-fill" ></view>
+						<view class="icon iconfont icon-bad-fill"></view>
 						{{postItem.infonum.cainum}}
 					</view>
 				</view>
@@ -54,11 +54,11 @@
 			item: Object,
 			index: Number
 		},
-		data(){
-			return{
-				postItem:{}
+		data() {
+			return {
+				postItem: {}
 			}
-			
+
 		},
 		// 不要直接修改父组件传过来的值，通过放在data(){ return {postItem:this.item}}
 		// 将父组件传过来的数据放在data中created时赋值，  或直接将props的值放在data, data(){ return {postItem:this.item}}
@@ -66,14 +66,26 @@
 			this.postItem = this.item;
 		},
 		methods: {
-			// 进入详情页
-			intoDetail(item){
+			// 进入用户空间
+			toUserSpace() {
+				let otherinfo = {
+					username:this.postItem.username,
+					userpic:this.postItem.userpic,
+					user_id:this.postItem.user_id
+				}
 				uni.navigateTo({
-					url:"../comment-detail/comment-detail?itemData="+JSON.stringify(this.postItem)
+					// pages页相对路径
+					url: "../user-space/user-space?info=" + JSON.stringify(otherinfo)
+				})
+			},
+			// 进入详情页
+			intoDetail(item) {
+				uni.navigateTo({
+					url: "../comment-detail/comment-detail?itemData=" + JSON.stringify(this.postItem)
 				})
 			},
 			// 父组件的关注没有改变
-			guanzhu(){
+			guanzhu() {
 				this.postItem.isguanzhu = true;
 				uni.showToast({
 					title: '关注成功'
@@ -109,6 +121,5 @@
 </script>
 
 <style scoped>
- @import '../common/commentList.css'
-
+	@import '../common/commentList.css'
 </style>

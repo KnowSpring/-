@@ -2,7 +2,7 @@
 	<view class="my-data u-f-ac animated fadeIn fast">
 		<block v-for="(item,index) in mydata" :key="index">
 			<view class="u-f1 u-f-ajc u-f-column">
-				<view>{{item.num}}</view>{{item.name}}
+				<view class="u-f">{{item.num}} <view class="font u-f" >{{item.type === 1?'kcal':'g'}}</view></view>{{item.name}}
 			</view>
 		</block>
 	</view>
@@ -17,6 +17,10 @@
 </script>
 
 <style scoped>
+	.font{
+		font-size: 22upx;
+		align-items: flex-end;
+	}
 .my-data{ 
 	padding: 20upx 40upx;
 }

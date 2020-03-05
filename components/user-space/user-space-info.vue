@@ -3,10 +3,11 @@
 		<view class="user-space-userinfo-item">
 			<view>账号信息</view>
 			<view>账号年龄：{{getRegAge}}</view>
-			<view>账号ID：{{userinfo.id}}</view>
+			<view>账号ID：{{userinfo.user_id}}</view>
 		</view>
 		<view class="user-space-userinfo-item">
 			<view>个人信息</view>
+			<view>体重：{{userinfo.weight}} kg</view>
 			<view>星座：{{getXingZuo}}</view>
 			<view>职业：{{userinfo.job}}</view>
 			<view>故乡：{{userinfo.path}}</view>

@@ -130,7 +130,9 @@
 				console.log('返回上一步')
 			},
 			getCode() {
-				if(!this.checkPhone()){return}
+				if (!this.checkPhone()) {
+					return
+				}
 				if (this.timecode > 0) {
 					uni.showToast({
 						title: '请稍等',
@@ -151,8 +153,13 @@
 				}, 1000)
 
 			},
+			async getCuruserInfo(){
+				let userid  = this.$store.state.userinfo.currentid
+				let [err,res] = await this.$http.get(`/users/${userid}`)
+				Object.assign(this.$store.state.userinfo,res.data.info)
+			},
 			// 提交登录
-			submit() {
+			async submit(option = {}) {
 				// 账户密码登录
 				if (!this.status) {
 					//用户名正则，4到16位（字母，数字，下划线，减号）
@@ -165,12 +172,90 @@
 						return;
 					}
 					console.log("提交登录")
-					return;
+					uni.showLoading({
+						title: '登录中',
+						mask: true
+					})
+					let [error, res] = await this.$http.post('/users/login', {
+						username: this.username,
+						password: this.password
+					}, )
+					// 登录成功
+					if (res.statusCode === 200) {
+						// 保存登录状态
+						this.$store.state.token = true
+						this.$store.state.userinfo = res.data.myinfo
+						//保存本地
+						uni.setStorageSync('token', res.data.token)
+						// 关闭登录中
+						uni.hideLoading()
+						uni.showToast({
+							title: '登录成功'
+						})
+						// 查询当前用户信息
+						this.getCuruserInfo();
+						// 返回上一步
+						if (!option.Noback) {
+							uni.navigateBack({
+								delta: 1
+							})
+						}
+					} else {
+						//登录失败
+						uni.showToast({
+							title: res.data.msg,
+							icon: 'none'
+						})
+						uni.hideLoading()
+						return false;
+
+					}
+					// return 不执行下一种登录
+					return true;
 				}
-				
+
 				// 验证码登录
 				if (this.checkPhone()) {
 					console.log("提交登录")
+					uni.showLoading({
+						title: '登录中',
+						mask: true
+					})
+					let [err, res] = await this.$http.post('/users/phoneLogin', {
+						phone: this.phone,
+						code: this.yanzhengma
+					}, )
+					console.log(res.data)
+					// 登录成功
+					if (res.statusCode === 200) {
+						// 保存登录状态
+						this.$store.state.token = true,
+						this.$store.state.userinfo = res.data.myinfo
+						//保存本地
+						uni.setStorageSync('token', res.data.token)
+						// 关闭登录中
+						uni.hideLoading()
+						uni.showToast({
+							title: '登录成功'
+						})
+						// 查询当前用户信息
+						this.getCuruserInfo();
+						// 返回上一步
+						if (!option.Noback) {
+							uni.navigateBack({
+								delta: 1
+							})
+						}
+					} else {
+						//登录失败
+						uni.showToast({
+							title: res.data.msg,
+							icon: 'none'
+						})
+						uni.hideLoading()
+						return false;
+					
+					}
 				}
 
 

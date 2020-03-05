@@ -3,8 +3,8 @@
 		<template v-if="!islogin">
 			<!-- 未登录 -->
 			<view class="u-f-ajc my-title">登陆健身美食，体验更多功能</view>
-			<!-- 第三方登录 -->
-			<other-login></other-login>
+<!-- 			第三方登录
+			<other-login></other-login> -->
 			<!-- 账号密码登录 -->
 			<view class="u-f-ajc" @tap="passwordLogin">
 				账户密码登录<view class="icon iconfont icon-arrow-right"></view>
@@ -12,7 +12,7 @@
 		</template>
 		<template v-else>
 			<!-- 登陆 -->
-			<my-info :myinfo="myinfo"></my-info>
+			<my-info :myinfo="myinfo" ></my-info>
 		</template>
 		<!-- 功能列表 -->
 		<view class="my-list">
@@ -27,7 +27,7 @@
 <script>
 	import myInfo from '../../components/my/my-info.vue';
 	import myListItem from "../../components/my/my-list-item.vue";
-	import otherLogin from "../../components/my/other-login.vue";
+	// import otherLogin from "../../components/my/other-login.vue";
 
 	export default {
 		data() {
@@ -36,8 +36,8 @@
 				myinfo: {
 					userpic: "../../static/userpic/1.jpg",
 					username: "昵称",
-					totalget: 0,
-					totallost: 0,
+					baseconsume: 0,
+					baseprotein: 0,
 				},
 				list: [{
 						icon: "add-cart",
@@ -65,7 +65,7 @@
 					},
 					{
 						icon: "add-cart",
-						name: "小纸条",
+						name: "关注列表",
 						clicktype: "navigateTo",
 						url: "../../pages/paper/paper"
 					}
@@ -80,10 +80,13 @@
 				})
 			}
 		},
+		onShow() {
+			this.isLogin()
+		},
 		components: {
 			myInfo,
 			myListItem,
-			otherLogin,
+			// otherLogin,
 		},
 		methods: {
 			// 密码登陆
@@ -91,6 +94,25 @@
 				uni.navigateTo({
 					url:'../login/login'
 				})
+			},
+			isLogin(){
+				if(this.$store.state.token){
+					this.islogin = true;
+					// 小坑 数据问题
+					console.log(this.$store.state.userinfo)
+					console.log(this.myinfo)
+					let {userpic,username,baseconsume,baseprotein}= this.$store.state.userinfo
+					this.myinfo ={
+							userpic,
+							username,
+							baseconsume,
+							baseprotein
+						}
+					
+					console.log(this.myinfo)
+					return;
+				}
+				this.islogin = false;
 			}
 
 		}

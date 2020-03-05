@@ -41,7 +41,26 @@
 				this.change();
 			}
 		},
+		onShow(){
+			this.init()
+		},
 		methods: {
+			init() {
+				if (!this.$store.state.userinfo.phone) {
+					uni.showModal({
+						title: '提示',
+						content: '请先登录',
+						confirmText: '去登录',
+						success: (res) => {
+							if (res.confirm) {
+								uni.navigateTo({
+									url: '/pages/login/login'
+								})
+							}
+						}
+					})
+				}
+			},
 			// 监听输入框
 			change(){
 				if(this.oldpassword && this.newpassword && this.renewpassword){
@@ -83,15 +102,52 @@
 				return true;
 			},
 			// 提交
-			submit(){
+			async submit(option ={}){
+				let data; //响应对象
 				this.loading=true; this.disabled=true;
 				if(!this.check()){ this.loading=false; this.disabled=false; return; }
 				// 提交服务器
+				let params = {
+					newpassword: this.newpassword,
+					oldpassword: this.oldpassword
+				}
+				try {
+					// 未登录解析错误
+					let [err, res] = await this.$http.post('/users/changepassword', params, {
+						token: true,
+						checkToken: true
+					})
+					data = res
+				} catch (e) {
+					this.loading = false;
+					this.disabled = false;
+					uni.showToast({
+						title: '未登录',
+						mask: false,
+						duration: 1500,
+						icon: 'none',
+					});
+					throw '未登录'
+				}
 				uni.showToast({
-					title: '提交服务器',
+					title: data.data.msg,
 					mask: false,
+					icon: 'none',
 					duration: 1500
 				});
+				// 修改按钮状态
+				this.loading = false;
+				this.disabled = false;
+				if (data.statusCode === 200) {
+					// 修改state状态
+					this.$store.commit('changeUserinfo',{key:'password',value:true})
+					// 返回上一层
+					if (!option.Noback) {
+						uni.navigateBack({
+							delta: 1
+						})
+					}
+				}
 				this.loading=false; this.disabled=false;
 			}
 		}

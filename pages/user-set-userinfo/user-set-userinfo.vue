@@ -7,6 +7,7 @@
 				<view class="icon iconfont icon-fabu"></view>
 			</view>
 		</view>
+		
 		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
 			<view>昵称</view>
 			<view class="u-f-ac">
@@ -15,20 +16,61 @@
 				<view class="icon iconfont icon-fabu"></view>
 			</view>
 		</view>
+		
 		<view class="user-set-userinfo-list u-f-ac u-f-jsb" @tap="changeInfo('sex')">
 			<view>性别</view>
 			<view class="u-f-ac">
-				<view>男</view>
+				<view>{{sexArr[personInfo.sex]}}</view>
 				<view class="icon iconfont icon-fabu"></view>
 			</view>
 		</view>
 
+	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+		<view>身体体重</view>
+		<view class="u-f-ac">
+			<input class="text-right" type="number" v-model="personInfo.weight">
+			<view> kg</view>
+			<view class="icon iconfont icon-fabu"></view>
+		</view>
+	</view>
+	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+		<view>基础代谢</view>
+		<view class="u-f-ac">
+			<input class="text-right" type="number" v-model="personInfo.baseconsume">
+			<view>kcal</view>
+			<view class="icon iconfont icon-fabu"></view>
+		</view>
+	</view>
+	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+		<view>基础蛋白</view>
+		<view class="u-f-ac">
+			<input class="text-right" type="number" v-model="personInfo.baseprotein">
+			<view> g</view>
+			<view class="icon iconfont icon-fabu"></view>
+		</view>
+	</view>
+	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+		<view>运动代谢</view>
+		<view class="u-f-ac">
+			<input class="text-right" type="number" v-model="personInfo.sportconsume">
+			<view> kcal</view>
+			<view class="icon iconfont icon-fabu"></view>
+		</view>
+	</view>
+	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+		<view>运动蛋白</view>
+		<view class="u-f-ac">
+			<input class="text-right" type="number" v-model="personInfo.sportprotein">
+			<view> g</view>
+			<view class="icon iconfont icon-fabu"></view>
+		</view>
+	</view>
 
-		<picker mode="date" :value="personInfo.birthdate" :start="startDate" :end="endDate" @change="bindDateChange">
+		<picker mode="date" :value="personInfo.birthday" :start="startDate" :end="endDate" @change="bindDateChange">
 			<view class="user-set-userinfo-list u-f-ac u-f-jsb">
 				<view>生日</view>
 				<view class="u-f-ac">
-					<view>{{personInfo.birthdate}}</view>
+					<view>{{personInfo.birthday}}</view>
 					<view class="icon iconfont icon-fabu"></view>
 				</view>
 			</view>
@@ -36,19 +78,9 @@
 
 
 		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
-			<view>身体体重</view>
-			<view class="u-f-ac">
-				<input class="text-right" type="number" v-model="personInfo.weight">
-				<view> kg</view>
-				<view class="icon iconfont icon-fabu"></view>
-			</view>
-
-
-		</view>
-		<view class="user-set-userinfo-list u-f-ac u-f-jsb" @tap="changeInfo('job')">
 			<view>职业</view>
 			<view class="u-f-ac">
-				<view>IT</view>
+				<view>{{personInfo.job}}</view>
 				<view class="icon iconfont icon-fabu"></view>
 			</view>
 		</view>
@@ -67,23 +99,27 @@
 </template>
 
 <script>
-	let sex = ['男', '女', '不限']
-	let job = ['IT', 'up主', '秘密']
+	let sexArr = ['男', '女', '不限']
+	// let job = ['IT', 'up主','漫画家' '秘密']
 	import simpleAddress from "@/components/simple-address/simple-address.nvue"
 	export default {
 		data() {
 			return {
+				sexArr: sexArr,
 				personInfo: {
 					userpic: "../../static/userpic/1.jpg",
 					username: '昵称',
-					sex: '男',
-					birthdate: '1998-1-1',
-					city: '中国肇庆',
-					weight: '66'
+					sex: 0,
+					birthday: "请填写",
+					city: "请填写",
+					weight: 0,
+					baseconsume: 0,
+					sportconsume: 0,
+					baseprotein: 0,
+					sportprotein: 0
+
 				},
 				cityPickerValueDefault: [0, 0, 1]
-
-
 			}
 		},
 		computed: {
@@ -96,6 +132,9 @@
 		},
 		components: {
 			simpleAddress
+		},
+		onShow() {
+			this.personInfo = JSON.parse(JSON.stringify(this.$store.state.userinfo))
 		},
 		methods: {
 			// 修改头像
@@ -110,7 +149,7 @@
 			},
 			// 日期
 			bindDateChange(e) {
-				this.personInfo.birthdate = e.target.value
+				this.personInfo.birthday = e.target.value
 			},
 			getDate(type) {
 				const date = new Date();
