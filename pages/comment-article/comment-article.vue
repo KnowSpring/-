@@ -1,113 +1,118 @@
 <template>
 	<view class="article-contain">
-		<view class="article-title">{{pageData.title}}</view>
-		<view class="u-f">
-			<view class="u-f-ac article-info">作者：{{pageData.author}}</view>
-			<view class="u-f article-info">{{pageData.time}}</view>
+		<view class="article-title">{{detail.title}}</view>
+		<view class="u-f u-f-jsb">
+			<view class="u-f-ac article-info">作者：{{detail.username}}</view>
+			<view class="u-f article-info">{{detail.create_time}}</view>
 		</view>
 		<view class="article-content">
-			qqqqqq
-			<!-- <image class="wmax mgb-5" mode="widthFix" v-for="(item,key) in pageData.imgslist" :key="key" :src="item"></image> -->
+			<rich-text class="d-content" :nodes="detail.content">
+			</rich-text>
 		</view>
-		<rich-text class="d-content" :nodes="Strings">
-		</rich-text>
+		
 		<view class="u-f-ajc">
-			<!-- @click="loveToggle(pageData.data.id)" --> 
-			<view class="btn-love u-f-ajc" :class="pageData.islove?'btn-love-active':''">
+			<!-- @click="loveToggle(detail.data.id)" --> 
+			<view class="btn-love u-f-ajc" :class="{'btn-love-active':detail.infonum.commentDo === 1 }" @tap="doGoodToggle">
 				喜欢
 			</view>
 
-			<view class="btn-fav u-f-ajc"  :class="pageData.isfav?'btn-fav-active':''">收藏</view>
+			<view class="btn-collect u-f-ajc"  :class="{'btn-collect-active':detail.iscollection }" @tap="doCollectToggle">收藏</view>
 
 		</view>
 	</view>
 </template>
 
 <script>
-	// var app = require("../../common/common.js");
-	// var id;
+	import User from '../../common/js/user.js'
+	import time from'../../common/js/time.js'
 	export default {
-		data: function() {
+		data() {
 			return {
-				pageData: {
-					title: '标题标题标题',
-					author: '年后',
-					time: '2020-1-1'
-
-				},
+				detail:{},
 				Strings: '<div style="text-align:center;"><img src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/uni@2x.png"/></div>'
 			}
 
 		},
-		onLoad: function(option) {
-			// 传过来
-			// id = option.id;
-			// this.getPage();
-			// this.addClick();
-
+		onLoad(e){
+			let obj = this.$store.state.article
+			obj.create_time = time.gettime.gettime(obj.create_time)
+			uni.setNavigationBarTitle({
+				title: obj.title
+			});
+			this.detail = obj;
+			
 		},
 		onShareAppMessage: function() {
 
 		},
 		methods: {
-
-
-
-
-			//res.data.data.data.content+='<style>img{max-width:100%;width:220px;height:auto;}</style>';
-			// res.data.data.data.content=app.html(res.data.data.data.content);
-
-
-
-
-
-			favToggle: function(id) {
-				var that = this;
-				uni.request({
-					url: that.app.apiHost + "?fromapp=wxapp&m=fav&a=toggle&ajax=1",
-					data: {
-						objectid: id,
-						authcode: that.app.getAuthCode(),
-						tablename: "mod_forum"
-					},
-					success: function(res) {
-						if (res.data.error == 1000) {
-							that.app.goLogin();
-							return false;
-						}
-						if (res.data.data == 'delete') {
-							that.pageData.isfav = false;
-						} else {
-							that.pageData.isfav = true;
-						}
-
-					}
-				})
+			async doCollectToggle() {
+				if(!User.isdo()){
+					return
+				}
+				let params = {
+					 postid: this.detail.id,
+					  currentid: this.$store.state.userinfo.currentid
+				}
+				let [err,res] = await this.$http.post('/posts/collection',params,{token:true})
+				if(res.data.msg){
+					uni.showToast({
+						title: res.data.msg,
+						icon:"none"
+					})
+				}
+				this.detail.iscollection = res.data.iscollection
+				this.$forceUpdate();
+				// 通知comment
+				let data = {
+					type:'collection',
+					data:this.detail.iscollection,
+					postid:this.detail.id
+				}
+				uni.$emit('updatePostData',data)
+				// 通知state
+				this.$store.commit('changeArticleContent',{iscollection:this.detail.iscollection})
+			
 			},
-			loveToggle: function(id) {
-				var that = this;
-				uni.request({
-					url: that.app.apiHost + "?m=love&a=toggle&ajax=1",
-					data: {
-
-						fromapp: that.app.fromapp(),
-						objectid: id,
-						authcode: that.app.getAuthCode(),
-						tablename: "mod_forum"
-					},
-					success: function(res) {
-						if (res.data.error == 1000) {
-							that.app.goLogin();
-							return false;
-						}
-						if (res.data.data == 'delete') {
-							that.pageData.islove = false;
-						} else {
-							that.pageData.islove = true;
-						}
-
-					}
-				})
+			doGoodToggle() {
+				if(!User.isdo()){
+					return
+				}
+				let style;//点赞 
+					console.log(this.detail.infonum.dingnum)
+				if(this.detail.infonum.commentDo === 1){
+					// 取消点赞，数量减1
+					this.detail.infonum.commentDo = 0
+					this.detail.infonum.dingnum --
+					style = 3 //表示取消点赞
+					
+				}else{
+					style = 0 //表示点赞
+					this.detail.infonum.commentDo = 1
+					this.detail.infonum.dingnum ++
+				}
+				let data = {
+					commentDo : this.detail.infonum.commentDo,
+					dingnum : this.detail.infonum.dingnum,
+					type:'dianzan',
+					style:style,
+					currentid: this.$store.state.userinfo.currentid,
+					postid: this.detail.id //文章id
+				}
+				this.$forceUpdate();
+				// 通知comment
+				uni.$emit('updatePostData',data)
+				// 通知user-collect页
+				// uni.$emit('updateCollectData',data)
+				// 通知state
+				let article = {
+					commentDo : this.detail.infonum.commentDo,
+					dingnum : this.detail.infonum.dingnum,
+				}
+				this.$store.commit('changeArticleContent',article)
+				
+				
+				
 			}
 
 		}
@@ -117,6 +122,7 @@
 	.article-contain {
 		width: 100%;
 		padding: 30upx;
+		box-sizing: border-box;
 
 	}
 	.article-title {
@@ -126,7 +132,6 @@
 	.article-info {
 		color: #555;
 		font-size: 30upx;
-		margin-right: 60upx;
 	}
 	.article-content {
 		font-size: 40upx;
@@ -134,14 +139,15 @@
 		line-height: 1.5;
 		margin-bottom: 24upx;
 	}
+	
 
-	.article-content img {
+	.article-content .d-content img {
 		max-width: 100%;
 	}
 
 	/****点赞 喜欢按钮****/
 
-	.btn-love,.btn-fav  {
+	.btn-love,.btn-collect  {
 		padding: 0 24upx;
 		height: 86.4upx;
 		border: 1px solid #aaa;
@@ -153,7 +159,7 @@
 		margin-right: 40upx;
 	}
 	
-	.btn-love:before,.btn-fav:before {
+	.btn-love:before,.btn-collect:before {
 		font-family: iconfont;
 		font-size: 33.6upx;
 		margin-right: 7.2upx;
@@ -161,7 +167,7 @@
 	.btn-love:before{
 		content: "\e780";
 	}
-	.btn-fav:before {
+	.btn-collect:before {
 		content: "\e780";
 	}
 		
@@ -173,11 +179,11 @@
 	.btn-love-active:before {
 		color: #f30;
 	}
-	.btn-fav-active {
+	.btn-collect-active {
 		color: #f30;
 	}
 
-	.btn-fav-active:before {
+	.btn-collect-active:before {
 		color: #f30;
 	}
 </style>

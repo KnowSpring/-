@@ -15,13 +15,15 @@
 
 		</block>
 		<!-- 固定栏 -->
-		<view class="advise-fixed u-f-ajc">
-			运动总消耗：<text class="red">{{totalHeat}}</text> 千卡
+		<view class="advise-fixed u-f-ac ">
+			<view class="total">此次运动总消耗：<text class="totalred">{{totalHeat}}</text> 千卡</view>
+			<button class="u-f-ajc" v-show="totalHeat>0" @tap="dosportSubmit">确定</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import User from '../../common/js/user.js'
 	export default {
 		data() {
 			return {
@@ -128,27 +130,50 @@
 					this.totalHeat = 0;
 					let total = this.totalHeat;
 					let time = 0;
-					 this.sportKinds.map((item) => {
+					this.sportKinds.map((item) => {
 						newSportTime[item.english] === '' ? 0 : newSportTime[item.english]
-						time = (newSportTime[item.english]/60).toFixed(2)
-						total +=  time * item.unit
+						time = (newSportTime[item.english] / 60).toFixed(2)
+						total += time * item.unit
 					})
 					this.totalHeat = total.toFixed(2);
 				}
 			}
 		},
 		methods: {
-
+			dosportSubmit() {
+				if (!User.isdo()) {
+					return;
+				}
+				uni.showModal({
+					content: "确认提交?",
+					cancelText: '取消',
+					confirmText: '确定',
+					success: async res => {
+						if (res.confirm) {
+							let sportconsume = this.totalHeat
+							await this.$http.post('/users/addaport',{sportconsume},{token:true})
+							uni.switchTab({
+								url: '/pages/consume/consume'
+							});
+						}
+						
+					}
+				});
+			}
 		}
 	}
 </script>
 
 <style scoped>
+	/* 弹出框样式 */
+  .uni-modal__bd{
+		font-size: 40upx !important;
+		color:#007AFF !important;
+	}
 	.sport-container {
 		width: 100%;
 		background-color: #F4F4F4;
 		margin-bottom: 140upx;
-		;
 	}
 
 	.user-set-userinfo-list {
@@ -165,7 +190,7 @@
 
 	.red {
 		color: #F01414;
-		font-size: 30upx;
+		font-size: 32upx;
 		margin-right: 4upx;
 	}
 
@@ -185,7 +210,24 @@
 		background-color: #FFFFFF;
 		border-top: 2upx solid #CCCCCC;
 		border-bottom: 2upx solid #CCCCCC;
-		font-size: 32upx;
+		justify-content: flex-start;
+	}
+
+	.advise-fixed .total {
+		font-size: 34upx;
 		font-weight: 700
+	}
+
+	.advise-fixed .totalred {
+		color: #F01414;
+		font-size: 40upx;
+		margin-right: 4upx;
+	}
+	.advise-fixed button {
+		width: 130upx;
+		height: 80upx;
+		font-size: 32upx;
+		color: #FFFFFF;
+		background-color: rgb(0, 122, 255);
 	}
 </style>

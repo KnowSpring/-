@@ -21,12 +21,15 @@
 		props:{
 			userinfo:Object
 		},
+		created(){
+			console.log(this.userinfo)
+		},
 		computed:{
 			getRegAge(){
-				return t.gettime.sumAge(this.userinfo.regtime)
+				return t.gettime.sumAge(this.userinfo.regtime) || 0
 			},
 			getXingZuo(){
-				return t.gettime.getHoroscope(this.userinfo.birthday)
+				return t.gettime.getHoroscope(this.userinfo.birthday) || '未知'
 			}
 		}
 	}

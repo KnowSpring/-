@@ -11,6 +11,7 @@
 </template>
 
 <script>
+	import User from '../../common/js/user.js'
 	export default {
 		data() {
 			return {
@@ -33,20 +34,7 @@
 		},
 		methods: {
 			init() {
-				if (!this.$store.state.userinfo.phone) {
-					uni.showModal({
-						title: '提示',
-						content: '请先登录',
-						confirmText: '去登录',
-						success: (res) => {
-							if (res.confirm) {
-								uni.navigateTo({
-									url: '/pages/login/login'
-								})
-							}
-						}
-					})
-				}
+				User.islogin()
 			},
 			// 监听输入框
 			change() {
@@ -86,7 +74,7 @@
 				return true;
 			},
 			// 提交
-			async submit(option={}) {
+			async submit(option = {}) {
 				let data; //响应对象
 				this.loading = true;
 				this.disabled = true;
@@ -131,7 +119,9 @@
 					// 返回上一层
 					if (!option.Noback) {
 						// 修改state状态
-						this.$store.commit('changeUserinfo',{key:'email',value:this.email})
+						this.$store.commit('changeUserinfo', {
+							email: this.email
+						})
 						uni.navigateBack({
 							delta: 1
 						})

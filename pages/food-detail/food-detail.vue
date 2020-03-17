@@ -7,7 +7,7 @@
 			<view class="u-f1">
 				<view class="name">{{food.name}}</view>
 				<view class="energy">
-					<text class="uni-h3">103千卡</text>/每100克
+					<text class="uni-h3">{{food.heat}}千卡</text>/每100克
 				</view>
 			</view>
 
@@ -20,30 +20,35 @@
 			</view>
 			<view class="middle-col u-f">
 				<view class="u-f1 u-f-ajc">热量</view>
-				<view class="u-f1 u-f-ajc">144.00千卡</view>
+				<view class="u-f1 u-f-ajc">{{food.heat}}千卡</view>
 				<view class="u-f1 u-f-ajc">低热量</view>
 			</view>
 			<view class="middle-col u-f">
-				<view class="u-f1 u-f-ajc">热量</view>
-				<view class="u-f1 u-f-ajc">144.00千卡</view>
-				<view class="u-f1 u-f-ajc">低热量</view>
+				<view class="u-f1 u-f-ajc">蛋白质</view>
+				<view class="u-f1 u-f-ajc">{{food.protein}}g</view>
+				<view class="u-f1 u-f-ajc">低蛋白</view>
 			</view>
 			<view class="middle-col u-f">
-				<view class="u-f1 u-f-ajc">热量</view>
-				<view class="u-f1 u-f-ajc">144.00千卡</view>
-				<view class="u-f1 u-f-ajc">低热量</view>
+				<view class="u-f1 u-f-ajc">碳水</view>
+				<view class="u-f1 u-f-ajc">{{food.carbs}}g</view>
+				<view class="u-f1 u-f-ajc">低碳水</view>
 			</view>
 			<view class="middle-col u-f">
-				<view class="u-f1 u-f-ajc">热量</view>
-				<view class="u-f1 u-f-ajc">144.00千卡</view>
-				<view class="u-f1 u-f-ajc">低热量</view>
+				<view class="u-f1 u-f-ajc">脂肪</view>
+				<view class="u-f1 u-f-ajc">{{food.fat}}g</view>
+				<view class="u-f1 u-f-ajc">低脂肪</view>
+			</view>
+			<view class="middle-col u-f">
+				<view class="u-f1 u-f-ajc">纤维素</view>
+				<view class="u-f1 u-f-ajc">{{food.fibrin}}g</view>
+				<view class="u-f1 u-f-ajc">低纤维素</view>
 			</view>
 		</view>
 		<view class="detail-footer">
 			<view>食物红绿灯:</view>
 			<view class="u-f">
 				<view class="foot-advise u-f-ajc"><view class="icon iconfont icon-yuan u-f-ac"></view><view class="u-f-ac">推荐</view></view>
-				<view class="u-f1">文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字</view>
+				<view class="u-f1">{{food.content}}</view>
 			</view>
 		</view>
 	</view>

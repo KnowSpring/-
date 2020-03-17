@@ -153,10 +153,20 @@
 				}, 1000)
 
 			},
-			async getCuruserInfo(){
-				let userid  = this.$store.state.userinfo.currentid
-				let [err,res] = await this.$http.get(`/users/${userid}`)
-				Object.assign(this.$store.state.userinfo,res.data.info)
+			async getCuruserInfo() {
+				let userid = this.$store.state.userinfo.currentid ||0
+				let [err, res] = await this.$http.get(`/users/${userid}`)
+				Object.assign(this.$store.state.userinfo, res.data.info)
+				// 7天内饮食
+				let data = await this.$http.post('/users/seveneat', {}, {
+					token: true
+				})		
+				this.$store.state.seventeat = data[1].data.data
+				// 7天内运动
+				  data = await this.$http.post('/users/sevensport', {}, {
+					token: true
+				})
+				this.$store.state.sevensport = data[1].data.data
 			},
 			// 提交登录
 			async submit(option = {}) {
@@ -183,7 +193,11 @@
 					// 登录成功
 					if (res.statusCode === 200) {
 						// 保存登录状态
-						this.$store.state.token = true
+						this.$store.state.token = true;
+						let userpic= res.data.myinfo.userpic
+						if(userpic.indexOf('http') === -1 && userpic.indexOf(this.config.baseUrl) === -1) {
+							res.data.myinfo.userpic = this.config.baseUrl + userpic
+						}
 						this.$store.state.userinfo = res.data.myinfo
 						//保存本地
 						uni.setStorageSync('token', res.data.token)
@@ -194,7 +208,11 @@
 						})
 						// 查询当前用户信息
 						this.getCuruserInfo();
-						// 返回上一步
+						// 更新未登录时的文章
+						let data = {
+							type:'updateLists'
+						}
+						uni.$emit('updatePostData',data)
 						if (!option.Noback) {
 							uni.navigateBack({
 								delta: 1
@@ -225,12 +243,16 @@
 						phone: this.phone,
 						code: this.yanzhengma
 					}, )
-					console.log(res.data)
 					// 登录成功
 					if (res.statusCode === 200) {
 						// 保存登录状态
-						this.$store.state.token = true,
+						this.$store.state.token = true;
+						let userpic= res.data.myinfo.userpic
+						if(userpic.indexOf('http') === -1 && userpic.indexOf(this.config.baseUrl) === -1) {
+							res.data.myinfo.userpic = this.config.baseUrl + userpic
+						}
 						this.$store.state.userinfo = res.data.myinfo
+						
 						//保存本地
 						uni.setStorageSync('token', res.data.token)
 						// 关闭登录中
@@ -240,6 +262,12 @@
 						})
 						// 查询当前用户信息
 						this.getCuruserInfo();
+						// 更新未登录时的文章
+						let data = {
+							type:'updateLists'
+						}
+						uni.$emit('updatePostData',data)
+						
 						// 返回上一步
 						if (!option.Noback) {
 							uni.navigateBack({
@@ -254,7 +282,7 @@
 						})
 						uni.hideLoading()
 						return false;
-					
+
 					}
 				}
 

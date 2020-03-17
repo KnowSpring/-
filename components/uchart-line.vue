@@ -1,8 +1,8 @@
 <template>
-	<view class="qiun-columns">
+	<view class="qiun-columns" v-if="(eatLength)|| (sportLength)">
 		<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-			<view class="qiun-title-dot-light">
-				<view class="icon iconfont icon-zongjie"></view>最近7天的饮食
+			<view class="qiun-title-dot-light u-f-ac">
+				<view class="icon iconfont icon-zongjie" ></view>最近7天的饮食和消耗
 			</view>
 		</view>
 		<view class="qiun-charts">
@@ -21,24 +21,60 @@
 				cWidth: '',
 				cHeight: '',
 				pixelRatio: 1,
+				seveneat:[],
+				sevensport:[]
 			}
 		},
-		created() {
+		computed:{
+			eatLength(){
+				return this.$store.state.seventeat.length
+			},
+			sportLength(){
+				return this.$store.state.sevensport.length 
+			}
+		},
+		 created() {
 			_self = this;
 			this.cWidth = uni.upx2px(690);
 			this.cHeight = uni.upx2px(500);
 			this.getServerData();
 		},
+		beforeUpdate(){
+			_self = this;
+			this.cWidth = uni.upx2px(690);
+			this.cHeight = uni.upx2px(500);
+			this.getServerData();
+		},
+
 		methods: {
 			getServerData() {
-				let categories = ['2020-1-1', '2020-1-1', '2020-1-1', '2020-1-1', '2020-1-1', '2020-1-1', '2020-1-1'];
+				let categories = [];
 				let series = [{
-					name: '热量/kcal',
-					data: [3135, 210, 334, 135, 158]
-				}, {
+					name: '摄入量/kcal',
+					data: []
+				},
+				{
+					name: '消耗量/kcal',
+					data: []
+				},{
 					name: '蛋白质/g',
-					data: [335, 310, 234, 135, 1548]
-				}]
+					data: []
+				}
+				]
+				if(this.eatLength>0){
+					this.$store.state.seventeat.map((item)=>{
+						categories.push(item.date)
+						series[0].data.push(item.dayheat)
+						series[2].data.push(item.dayprotein)
+					})
+				}
+				
+		        if(this.sportLength>0){
+					this.$store.state.sevensport.map((item)=>{
+						series[1].data.push(item.daysport)
+					})
+				}
+				
 				let LineA = {
 					categories,
 					series

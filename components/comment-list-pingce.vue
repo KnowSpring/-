@@ -1,12 +1,12 @@
 <template>
-	<view class="comment-list-pingce-container">
+	<view class="comment-list-pingce-container" @tap="intoArticleDetail">
 		<view class="comment-list-pingce u-f-ajc animated fadeIn fast">
-			<image :src="item.titlepic" mode="widthFix"></image>
+			<image :src="pingceItem.titlepic" mode="widthFix"></image>
 			<view class="u-f-ac u-f-jsb u-f-column">
-				<view class="username">/ {{item.username}} /</view>
-				<view class="title">{{item.title}}</view>
+				<view class="username">/ {{pingceItem.username}} /</view>
+				<view class="title">{{pingceItem.title}}</view>
 				<view class="u-f-ac read">
-					<view class="iconfont icon-add-cart u-f-ajc "></view>{{item.readnum}}阅读
+					<view class="iconfont icon-add-cart u-f-ajc "></view>{{pingceItem.infonum.dingnum}}点赞
 				</view>
 			</view>
 
@@ -22,9 +22,18 @@
 		},
 		data() {
 			return {
-				num: this.item.readnum
+				pingceItem: this.item
 			}
 
+		},
+		methods:{
+			intoArticleDetail(){
+				let item = JSON.parse(JSON.stringify(this.pingceItem))
+				this.$store.commit('changeArticleContent',item)
+				uni.navigateTo({
+					url: "/pages/comment-article/comment-article"
+				})
+			}
 		}
 	}
 </script>

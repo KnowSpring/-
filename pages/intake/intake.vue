@@ -28,17 +28,17 @@
 							<image :src="food.img" mode="" style="width: 75px;height: 75px;margin-top: 6px; border-radius: 10%;"></image>
 							<view class="food-info u-f">
 								<view class='u-f u-f-jsb'>
-									<view class="u-f-ac">蛋白质：11g</view>
-									<view class="u-f-ac">脂肪： 23g</view>
+									<view class="u-f-ac">蛋白质：{{food.protein}}</view>
+									<view class="u-f-ac">脂肪： {{food.fat}}</view>
 								</view>
 
 								<view class='u-f u-f-jsb'>
-									<view class="u-f-ac">碳水：11g</view>
-									<view class="u-f-ac">纤维素： 23g</view>
+									<view class="u-f-ac">碳水：{{food.carbs}}</view>
+									<view class="u-f-ac">纤维素： {{food.fibrin}}</view>
 								</view>
 								<!-- 加减 -->
 								<view class="u-f u-f-jsb food-kcal">
-									<view >热量： <text class="food-price">222 kcal</text></view>
+									<view >热量： <text class="food-price">{{food.heat}}</text></view>
 									<cartcontrol :food="food" @add="addCart" @dec="decreaseCart"></cartcontrol>
 
 								</view>
@@ -63,29 +63,34 @@
 				goods: [{
 						"name": "热销",
 						"foods": [{
-
 								"name": "南瓜粥",
-								"price": 9.22,
-								"oldPrice": "",
+								"heat":334,
+								"protein": 9.22,
+								"fat": 45,
+								"carbs":22,
+								"fibrin":22,
 								"description": "食材：大米，南瓜",
-								"sellCount": 229,
 								"img": '../../static/nanguaz.jpg'
 
 							}, {
 								"name": "小米粥",
-								"price": 9.8,
-								"oldPrice": "",
+								"heat":334,
+								"protein": 9.22,
+								"fat": 45,
+								"carbs":22,
+								"fibrin":22,
 								"description": "食材：小米",
-								"sellCount": 239,
 								"img": '../../static/xiaomi.jpg'
 
 							},
 							{
 								"name": "油条",
-								"price": 1.88,
-								"oldPrice": "",
+								"heat":334,
+								"protein": 9.22,
+								"fat": 45,
+								"carbs":22,
+								"fibrin":22,
 								"description": "食材：油条",
-								"sellCount": 229,
 								"img": '../../static/youtiao.jpg'
 
 							}
@@ -95,18 +100,22 @@
 						"name": "折扣",
 						"foods": [{
 							"name": "油条1只",
-							"price": 1.88,
-							"oldPrice": "",
+							"heat":334,
+							"protein": 9.22,
+							"fat": 45,
+							"carbs":22,
+							"fibrin":22,
 							"description": "食材：油条",
-							"sellCount": 229,
 							"img": '../../static/youtiao.jpg'
 
 						}, {
 							"name": "艇仔粥",
-							"price": 9.9,
-							"oldPrice": "",
+							"heat":334,
+							"protein": 9.22,
+							"fat": 45,
+							"carbs":22,
+							"fibrin":22,
 							"description": "食材：瘦肉，干贝，花生等",
-							"sellCount": 239,
 							"img": '../../static/tingzaiz.jpg'
 
 						}],
@@ -116,10 +125,12 @@
 						"name": "套餐",
 						"foods": [{
 							"name": "油条2只",
-							"price": 1.88,
-							"oldPrice": "",
+							"heat":334,
+							"protein": 9.22,
+							"fat": 45,
+							"carbs":22,
+							"fibrin":22,
 							"description": "食材：油条",
-							"sellCount": 229,
 							"img": '../../static/youtiao.jpg'
 
 						}, {
@@ -437,6 +448,7 @@
 				this.$nextTick(() => {
 					this.getHeightList();
 				})
+		
 
 			},
 			// 进入详情页

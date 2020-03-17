@@ -1,28 +1,65 @@
 <template>
-	<view class="comment-list-shipu">
-		<image :src="item.titlepic"></image>
-		<view class="shipu-name ">{{item.title}}"</view>
+	<view class="comment-list-shipu" @tap="intoArticleDetail">
+		<image :src="shipuItem.titlepic"></image>
+		<view class="shipu-name ">{{shipuItem.title}}"</view>
 		<view class="u-f-ac u-f-jsb shipu-bottom">
 			<view class="userinfo u-f-ac">
-				<image :src="item.userpic"></image>{{item.username}}
+				<image :src="shipuItem.userpic"></image>{{shipuItem.username}}
 			</view>
-			<view class="u-f-ac">
-				<view class="icon iconfont icon-good-fill"></view>{{item.goodnum}}
+			<view class="u-f-ac" >
+				<view  class="icon iconfont icon-good-fill" @tap.stop="doGoodToggle" :class="{'active':(shipuItem.infonum.commentDo === 1)}" ></view>{{shipuItem.infonum.dingnum}}
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+		import User from '../common/js/user.js';
 	export default {
 		props: {
 			item: Object,
 			index: Number
 		},
 		data() {
-			return {}
+			return {
+				shipuItem:this.item
+			}
 		},
+		// created(){  //onLoad不可以
+		// 	uni.$on('updateLove',this.updateLove)
+		// },
 		methods: {
+			// // 更新详情页传来的数据
+			// updateLove(data){
+			// 	console.log('dd')
+			// 	this.shipuItem.infonum.commentDo = data.commentDo;
+			// 	this.shipuItem.infonum.dingnum = data.dingnum;
+			// 	console.log(this.shipuItem.infonum.dingnum)
+			// },
+			doGoodToggle(){
+				if(!User.isdo()){
+					return
+				}
+				if(this.shipuItem.infonum.commentDo === 1){
+					// 已点赞 变成没点赞，数量减1
+					this.shipuItem.infonum.commentDo = 0
+					this.shipuItem.infonum.dingnum --
+				}else{
+					this.shipuItem.infonum.commentDo = 1
+					this.shipuItem.infonum.dingnum ++
+				}
+				
+			},
+			// 进入详情页
+			intoArticleDetail(){
+				console.log(this.shipuItem)
+				// this.shiPuItem导致对象给了指针
+				let item = JSON.parse(JSON.stringify(this.shipuItem))
+				this.$store.commit('changeArticleContent',item)
+				uni.navigateTo({
+					url: "/pages/comment-article/comment-article"
+				})
+			}
 
 
 		}
@@ -47,6 +84,10 @@
 
 	.shipu-bottom {
 		padding: 10upx 0;
+	}
+	/* 点赞颜色 */
+	.active{
+		color:#f30;
 	}
 
 	.shipu-name {

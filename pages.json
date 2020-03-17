@@ -263,6 +263,24 @@
 					"navigationBarTitleText":"设置密码"
 			}
         }
+        ,{
+            "path" : "pages/eat-meal/eat-meal",
+            "style" : {
+            		"navigationBarTitleText":"每餐详情"
+            }
+        }
+        ,{
+            "path" : "pages/time-sport/time-sport",
+            "style" : {
+            		"navigationBarTitleText":"运动详情"
+            }
+        }
+        ,{
+            "path" : "pages/user-collect/user-collect",
+            "style" : {
+				"navigationBarTitleText":"收集列表"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

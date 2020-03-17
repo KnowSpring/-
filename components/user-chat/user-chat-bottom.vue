@@ -6,6 +6,7 @@
 </template>
 
 <script>
+	import User from '../../common/js/user.js'
 	export default {
 		props: {
 			focus: {
@@ -20,6 +21,9 @@
 		},
 		methods:{
 			submit(){
+				if(!User.isdo()){
+					return;
+				}
 				this.$emit('submit',this.text);
 				this.text="";
 			},

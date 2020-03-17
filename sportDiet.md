@@ -272,4 +272,177 @@ console.log(ext);
 Cannot read property 'replace' of undefined 覆盖时可能有些值没有为null
 ### 报错
 Uncaught (in promise) TypeError: undefined is not iterable! [err,data]解构不成功
+ Cannot read property '0' of undefined 遍历一个空数组（名字写错）
+ Unexpected token o in JSON at position 1
 未授权问题在options.header.token 改为 options.header.Authorization
+### 图片上传
+```js
+  // 图片上传
+  imageUpload(ctx) {
+    // 获取body中携带的参数
+    const { account, typeName } = ctx.request.body
+    // account:123456
+    // typeName:水果
+
+    // 通过ctx.request.files.file方法获取上传的文件对象
+
+    // 获取文件名称与文件所在路径
+    let { name: filename, path } = ctx.request.files.file
+    // //获取最后一个.的位置
+    // let index = filename.lastIndexOf('.')
+    // //获取后缀
+    // let ext = filename.substr(index)
+    // filename = Math.floor(Math.random() + 1000) + '' + Date.now() + ext
+
+    // 创建文件输入流
+    const fileReader = fs.createReadStream(path)
+
+    // 文件将要的存放文件夹路径
+    const fileDir = `${__dirname}/../../upload/images/${typeName}`
+
+    // 判断目录是否存在,目录不存在则创建
+    if (!fs.existsSync(fileDir)) {
+      try {
+        fs.mkdirSync(fileDir)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    // 保存文件的最终路径 (文件夹路径+文件名)
+    const filepath = `${fileDir}/${filename}`
+
+    // 创建文件输出流
+    const fileWriter = fs.createWriteStream(filepath)
+
+    // 写入文件数据
+    fileReader.pipe(fileWriter)
+
+    // 保存相对路径
+    let relpath = `images/${typeName}/${filename}`
+
+    // 至此文件已上传完成
+    return relpath
+  }
+}
+module.exports = tool
+```
+### koa 访问服务器图片
+```js
+app.js
+const Koa = require('koa')
+const path = require('path')
+const staticFiles = require('koa-static')
+const app = new Koa()
+// 1.静态资源服务，指定对外提供访问的根目录
+app.use(staticFiles(path.join(__dirname, 'upload')))
+//路径写法(不用写upload)
+localhost:5000/images/1.png
+```
+### 获取部分属性
+```js
+const obj = {
+    name: 'jack',
+    id: 1,
+    birthday: '12-07-09',
+    phone: 1232131231
+};
+const obj_new = JSON.parse(JSON.stringify(obj,["name","id"]));//{name: "jack", id: 1}
+//第二种(不建议)
+const { id, name } = obj;
+const newObj = { id, name }
+//第三种
+const {phone,...newObj} = obj//除了phone都有
+//数组 [,,newArr] = arr
+//第四种
+更好的 extend() 函数详见 JavaScript权威指南-第6版
+
+var obj = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+    e: 5
+};
+
+function extend(obj) {
+    var o = {},
+	//方法返回一个新的数组对象 Array.prototype.slice.call(arguments,1); 从第二个开始
+        attr = Array.prototype.slice.call(arguments).slice(1);
+
+    attr.forEach(function(val, index) {
+        if (val in obj) { o[val] = obj[val]; }
+    });
+
+    return o;
+
+}
+console.log(extend(obj, 'c', 'b')); //{ c: 3, b: 2 }
+
+```
+### a->b->c多重嵌套通讯
+```html
+A组件
+<template>
+ 		<child1
+ 			:p-child1="child1"
+ 			:p-child2="child2"
+		 	v-on:test1="onTest1" //此处监听了两个事件，可以在B组件或者C组件中直接触发
+ 			v-on:test2="onTest2"> 
+		 </child1>
+</template>
+B组件
+<template>
+ 		<p>props: {{pChild1}}</p>
+ 		<p>$attrs: {{$attrs}}</p>
+ 		<!-- C组件中能直接触发test的原因在于 B组件调用C组件时 使用 v-on 绑定了$listeners 属性 -->
+ 		<!-- 通过v-bind 绑定$attrs属性，C组件可以直接获取到A组件中传递下来的props（除了B组件中			 props声明的） -->
+ 		<child2 v-bind="$attrs" v-on="$listeners"></child2>
+ 
+<script>
+ import Child2 from './Child2.vue';
+ export default {
+ 	props: ['pChild1']
+	 	data () {
+	 		return {};
+	 	},
+	 	inheritAttrs: false,
+	 	components: { Child2 },
+	 	mounted () {
+	 		this.$emit('test1');
+	 	}
+	 };
+ </script>
+ C组件
+ <template>
+  <div class="child-2">
+ 	 <p>in child2:</p>
+  	<p>props: {{pChild2}}</p>
+  	<p>$attrs: {{$attrs}}</p>
+  <hr>
+  </div>
+ </template>
+ <script>
+ export default {
+ 	 props: ['pChild2'],
+ 	 data () {
+ 	 	return {};
+ 	 },
+ 	 inheritAttrs: false,
+ 	 mounted () {
+ 	 	this.$emit('test2');
+ 	 }
+ };
+ </script> 
+ ```
+ ### 注意传对象指针,要进行深拷贝 数据在组件处理完传给父组件
+ ### 父传子 数组   
+合并成一个对象传入 obj:{arr:[]},再监听对象
+ 原因：后台请求的数据，加载完毕之后才传入的，需要在组件中监听传入数据的变化
+ 然后我watch监听props传过来的值，然后在监听事件里面赋值data值
+### getServerData获取不到数据 很大可能异步，调用请求后台数据方法没有使用await
+	async created() {
+			await this.getSevenData();
+			this.getServerData();
+		},
+### data(){return {dayconsume:this.$store.state.dayconsume}}//因为只执行一次 dayconsume不会改变

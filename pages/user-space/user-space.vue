@@ -55,7 +55,11 @@
 					userid: 1213,
 					birthday: "1998-01-01",
 					job: "IT",
-					path: "广东广州"
+					path: "广东广州",
+					baseconsume:0,
+					baseprotein:0,
+					sportconsume:0,
+					sportprotein:0
 				},
 				spacedata: []
 
@@ -103,9 +107,8 @@
 
 			},
 			async getUserInfo(e) {
-				// 从我的进入
-				if (e.user_id == this.$store.state.userinfo.currentid) {
-					console.log(this.$store.state.userinfo)
+				// 从我的进入	
+				if (!e.hasOwnProperty('info') && e.user_id == this.$store.state.userinfo.currentid) {
 					this.userinfo = JSON.parse(JSON.stringify(this.$store.state.userinfo))
 					// 小坑固定背景图
 					this.userinfo.bgimg = 1
@@ -114,7 +117,7 @@
 					return;
 				}
 				// 表示从分享页面过来 传过来的是对象，包括姓名，昵称,use_id
-				let info = JSON.parse(e.info)
+				let info = JSON.parse(e.info || '{}')
 				if (info && Object.prototype.toString.call(info) === '[object Object]') {
 					// 我
 					if (info.user_id == this.$store.state.userinfo.currentid) {
@@ -155,6 +158,7 @@
 			},
 			// 切换图片
 			changeImage() {
+				console.log(this.userinfo.bgimg)
 				let n = parseInt(this.userinfo.bgimg)
 				this.userinfo.bgimg = n < 4 ? ++n : 1
 			},
@@ -189,7 +193,7 @@
 
 	.user-space-head-info>image {
 		width: 150upx;
-		height: 150upx;
+		height: 150upx !important;
 		border-radius: 100%;
 	}
 

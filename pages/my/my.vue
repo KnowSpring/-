@@ -46,13 +46,13 @@
 						url: "",
 					},
 					{
-						icon: "add-cart",
+						icon: "xihuan",
 						name: "我的收藏",
-						clicktype: "",
-						url: ""
+						clicktype: "navigateTo",
+						url: "../../pages/user-collect/user-collect"
 					},
 					{
-						icon: "add-cart",
+						icon: "mubiao",
 						name: "我的目标",
 						clicktype: "",
 						url: ""
@@ -64,7 +64,7 @@
 						url: ""
 					},
 					{
-						icon: "add-cart",
+						icon: "guanzhu",
 						name: "关注列表",
 						clicktype: "navigateTo",
 						url: "../../pages/paper/paper"

@@ -7,7 +7,7 @@
 				<view class="icon iconfont icon-fabu"></view>
 			</view>
 		</view>
-		
+
 		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
 			<view>昵称</view>
 			<view class="u-f-ac">
@@ -16,7 +16,7 @@
 				<view class="icon iconfont icon-fabu"></view>
 			</view>
 		</view>
-		
+
 		<view class="user-set-userinfo-list u-f-ac u-f-jsb" @tap="changeInfo('sex')">
 			<view>性别</view>
 			<view class="u-f-ac">
@@ -25,46 +25,46 @@
 			</view>
 		</view>
 
-	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
-		<view>身体体重</view>
-		<view class="u-f-ac">
-			<input class="text-right" type="number" v-model="personInfo.weight">
-			<view> kg</view>
-			<view class="icon iconfont icon-fabu"></view>
+		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+			<view>身体体重</view>
+			<view class="u-f-ac">
+				<input class="text-right" type="number" v-model="personInfo.weight">
+				<view> kg</view>
+				<view class="icon iconfont icon-fabu"></view>
+			</view>
 		</view>
-	</view>
-	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
-		<view>基础代谢</view>
-		<view class="u-f-ac">
-			<input class="text-right" type="number" v-model="personInfo.baseconsume">
-			<view>kcal</view>
-			<view class="icon iconfont icon-fabu"></view>
+		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+			<view>基础代谢</view>
+			<view class="u-f-ac">
+				<input class="text-right" type="number" v-model="personInfo.baseconsume">
+				<view>kcal</view>
+				<view class="icon iconfont icon-fabu"></view>
+			</view>
 		</view>
-	</view>
-	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
-		<view>基础蛋白</view>
-		<view class="u-f-ac">
-			<input class="text-right" type="number" v-model="personInfo.baseprotein">
-			<view> g</view>
-			<view class="icon iconfont icon-fabu"></view>
+		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+			<view>基础蛋白</view>
+			<view class="u-f-ac">
+				<input class="text-right" type="number" v-model="personInfo.baseprotein">
+				<view> g</view>
+				<view class="icon iconfont icon-fabu"></view>
+			</view>
 		</view>
-	</view>
-	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
-		<view>运动代谢</view>
-		<view class="u-f-ac">
-			<input class="text-right" type="number" v-model="personInfo.sportconsume">
-			<view> kcal</view>
-			<view class="icon iconfont icon-fabu"></view>
+		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+			<view>运动代谢</view>
+			<view class="u-f-ac">
+				<input class="text-right" type="number" v-model="personInfo.sportconsume">
+				<view> kcal</view>
+				<view class="icon iconfont icon-fabu"></view>
+			</view>
 		</view>
-	</view>
-	<view class="user-set-userinfo-list u-f-ac u-f-jsb">
-		<view>运动蛋白</view>
-		<view class="u-f-ac">
-			<input class="text-right" type="number" v-model="personInfo.sportprotein">
-			<view> g</view>
-			<view class="icon iconfont icon-fabu"></view>
+		<view class="user-set-userinfo-list u-f-ac u-f-jsb">
+			<view>运动蛋白</view>
+			<view class="u-f-ac">
+				<input class="text-right" type="number" v-model="personInfo.sportprotein">
+				<view> g</view>
+				<view class="icon iconfont icon-fabu"></view>
+			</view>
 		</view>
-	</view>
 
 		<picker mode="date" :value="personInfo.birthday" :start="startDate" :end="endDate" @change="bindDateChange">
 			<view class="user-set-userinfo-list u-f-ac u-f-jsb">
@@ -87,7 +87,7 @@
 		<view class="user-set-userinfo-list u-f-ac u-f-jsb" @tap="openAddres">
 			<view>家乡</view>
 			<view class="u-f-ac">
-				<view>{{personInfo.city}}</view>
+				<view>{{personInfo.path}}</view>
 				<view class="icon iconfont icon-fabu"></view>
 				<simple-address ref="simpleAddress" :pickerValueDefault="cityPickerValueDefault" @onConfirm="onConfirm" themeColor='#007AFF'></simple-address>
 			</view>
@@ -102,6 +102,7 @@
 	let sexArr = ['男', '女', '不限']
 	// let job = ['IT', 'up主','漫画家' '秘密']
 	import simpleAddress from "@/components/simple-address/simple-address.nvue"
+	import User from '../../common/js/user.js'
 	export default {
 		data() {
 			return {
@@ -134,6 +135,7 @@
 			simpleAddress
 		},
 		onShow() {
+			User.islogin()
 			this.personInfo = JSON.parse(JSON.stringify(this.$store.state.userinfo))
 		},
 		methods: {
@@ -143,7 +145,33 @@
 					count: 1,
 					sizeType: ['compressed'],
 					success: (res) => {
-						this.userpic = res.tempFilePaths;
+						let token = uni.getStorageSync('token')
+						uni.uploadFile({
+							url: this.config.webUrl + '/users/userpic', //仅为示例，非真实的接口地
+							name: 'file',
+							filePath: res.tempFilePaths[0],
+							formData: {
+								typeName: 'userpic',
+								baseUrl: this.config.baseUrl
+							},
+							header: {
+								'Authorization': token
+							},
+							success: (res) => {
+								// 保存每次返回的地址
+								console.log(res)
+								if (res.statusCode === 401) {
+									User.islogin();
+									return;
+								}
+								let data = JSON.parse(res.data || '[]')
+								// 在本页面更改头像
+								this.personInfo.userpic = data.userpic
+							   // 修改state
+							   this.$store.commit('changeUserinfo',{userpic:data.userpic})
+								console.log(this.personInfo.userpic)
+							}
+						});
 					}
 				})
 			},
@@ -171,10 +199,29 @@
 				this.$refs.simpleAddress.open();
 			},
 			onConfirm(e) {
-				this.personInfo.city = e.label
+				this.personInfo.path = e.label
 			},
 
-			submit() {
+			async submit() {
+				// 提交除头像外信息
+				const {
+					currentid,
+					user_id,
+					username,
+					userpic,
+					regtime,
+					phone,
+					email,
+					password,
+					...personInfo
+				} = this.personInfo
+				let res = await this.$http.post('/users/updateuserinfo', personInfo, {
+					token: true,
+					checkToken: true
+				})
+				if (res !== undefined) {
+					this.$store.commit('changeUserinfo', personInfo)
+				}
 
 			},
 			// 编辑性别，工作 资料
@@ -182,7 +229,7 @@
 				let arr = [];
 				switch (type) {
 					case 'sex':
-						arr = sex
+						arr = sexArr
 						break;
 					case 'job':
 						arr = job

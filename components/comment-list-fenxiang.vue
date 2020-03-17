@@ -3,10 +3,10 @@
 		<view class="comment-list animated fadeIn fast">
 			<view class="comment-userinfo u-f-ac u-f-jsb">
 				<view class="u-f-ac">
-					<image :src="postItem.userpic" mode="widthFix" lazy-load @tap="toUserSpace(postItem.id)"></image>
+					<image :src="postItem.userpic" mode="widthFix" lazy-load @tap="toUserSpace(postItem.user_id)"></image>
 					{{postItem.username}}
 				</view>
-				<view class="u-f-ac" v-show="!postItem.isguanzhu" @tap="guanzhu">
+				<view class="u-f-ac"  v-show="!postItem.isguanzhu" @tap="guanzhu">
 					<view class="icon iconfont icon-zengjia"></view>+关注
 				</view>
 			</view>
@@ -27,6 +27,7 @@
 					<view class="u-f-ac" :class="{'active':(postItem.infonum.commentDo === 1)}" @tap="zanCai('zan')">
 						<view class="icon iconfont icon-good-fill"></view>
 						{{postItem.infonum.dingnum}}
+						<!-- {{postItem.infonum.commentDo === 1}}{{postItem.infonum.commentDo}} -->
 					</view>
 					<view class="u-f-ac" :class="{'active':(postItem.infonum.commentDo==2)}" @tap="zanCai('cai')">
 						<view class="icon iconfont icon-bad-fill"></view>
@@ -49,6 +50,7 @@
 </template>
 
 <script>
+	import User from '../common/js/user.js'
 	export default {
 		props: {
 			item: Object,
@@ -56,14 +58,14 @@
 		},
 		data() {
 			return {
-				postItem: {}
+				postItem:{}
 			}
 
 		},
 		// 不要直接修改父组件传过来的值，通过放在data(){ return {postItem:this.item}}
 		// 将父组件传过来的数据放在data中created时赋值，  或直接将props的值放在data, data(){ return {postItem:this.item}}
 		created() {
-			this.postItem = this.item;
+			this.postItem = this.item
 		},
 		methods: {
 			// 进入用户空间
@@ -84,15 +86,26 @@
 					url: "../comment-detail/comment-detail?itemData=" + JSON.stringify(this.postItem)
 				})
 			},
-			// 父组件的关注没有改变
+			// 父组件的关注
 			guanzhu() {
+				if(!User.isdo()){
+					return;
+				}
+				let userid = this.postItem.user_id
+				let currentid = this.$store.state.userinfo.currentid;
 				this.postItem.isguanzhu = true;
-				uni.showToast({
-					title: '关注成功'
-				})
+				// 更新comment信息
+				uni.$emit('updatePostData',{currentid, userid,type:'guanzhu',data:true})
+				
 			},
 			// 父组件的顶踩数目和commentDo没有改变
 			zanCai(type) {
+				let  currentid = this.$store.state.userinfo.currentid;
+				let  postid = this.postItem.id
+				// 用户是否可以操作
+				if(!User.isdo()){
+					return;
+				}
 				switch (type) {
 					case 'zan':
 						if (this.postItem.infonum.commentDo === 1) {
@@ -101,6 +114,7 @@
 						this.postItem.infonum.dingnum++;
 						if (this.postItem.infonum.commentDo === 2) {
 							this.postItem.infonum.cainum--;
+							this.$emit('clickGood',{ currentid, postid, type:0})
 						}
 						this.postItem.infonum.commentDo = 1;
 						break;
@@ -111,6 +125,7 @@
 						this.postItem.infonum.cainum++;
 						if (this.postItem.infonum.commentDo === 1) {
 							this.postItem.infonum.dingnum--;
+								this.$emit('clickGood',{ currentid, postid, type:1})
 						}
 						this.postItem.infonum.commentDo = 2;
 						break;

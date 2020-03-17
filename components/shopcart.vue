@@ -9,9 +9,9 @@
 				</view>
 			</view>
 			<view class="middle">
-				<text class="total" :class="getAllCount ?　'active': ''">热量： <text class="red"> {{getAllPrice}} kcal  </text></text>
-				<view class="u-f u-f-jsb"><text>蛋白质： kkg</text><text>脂肪： kkg</text></view>
-				<view class="u-f u-f-jsb"><text>碳水：kkg</text><text>维生素： kkg</text></view>
+				<text class="total" :class="getAllCount ?　'active': ''">热量： <text class="red"> {{getAll.mealheat}} kcal  </text></text>
+				<view class="u-f u-f-jsb"><text>蛋白质： {{getAll.mealprotein}}g</text><text>脂肪： {{getAll.mealfat}}g</text></view>
+				<view class="u-f u-f-jsb"><text>碳水：{{getAll.mealcarbs}}g</text><text>维生素： {{getAll.mealfibrin}}g</text></view>
 
 			</view>
 			<view class="BtnRight u-f-ac">
@@ -30,7 +30,7 @@
 				<view class="list">
 					<view class="list-text" v-for="(item,index) in getList" :key="index">
 						<text style="flex:1">{{item.name}}</text>
-						<text style="flex:1">{{item.price}} kcal</text>
+						<text style="flex:1">{{item.heat}} kcal</text>
 						<cartcontrol :food="item" @add="addCart" @dec="decreaseCart"></cartcontrol>
 					</view>
 				</view>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+	import User from '../common/js/user.js'
 	import cartcontrol from '@/components/cartcontrol.vue'
 	// import {mul} from '@/utils/lib'
 	export default {
@@ -82,13 +83,25 @@
 
 
 			// 总价
-			getAllPrice() {
-				let result = 0;
-				let result1 = 0;
+			getAll() {
+				let result = {};
+				let heat = 0;
+				let protein = 0;
+				let fat = 0;
+				let carbs = 0;
+				let fibrin = 0;
 				this.goods.forEach((good) => {
 					good.foods.forEach((food) => {
-						result1 += this.accMul(food.count, food.price)
-						result = result1.toFixed(2);
+						heat += this.accMul(food.count, food.heat)
+						protein += this.accMul(food.count, food.protein)
+						fat += this.accMul(food.count, food.fat)
+						carbs += this.accMul(food.count, food.carbs)
+						fibrin += this.accMul(food.count, food.fibrin)
+						result.mealheat = heat.toFixed(2);
+						result.mealprotein = protein.toFixed(0);
+						result.mealfat= fat.toFixed(0);
+						result.mealcarbs= carbs.toFixed(0);
+						result.mealfibrin = fibrin.toFixed(0);
 					})
 				})
 				return result
@@ -97,7 +110,39 @@
 		methods: {
 			// 结算
 			toTotal() {
-				console.log('结算')
+				if (!User.isdo()) {
+					return;
+				}
+				if(parseInt(this.getAll.mealheat) === 0 ){
+					uni.showToast({
+						title: '请先添加食物',
+						icon:'none'
+					});					
+					return;
+				}
+				uni.showModal({
+					title: '提示',
+					content: "确认提交?",
+					cancelText: '取消',
+					confirmText: '确定',
+					success: async res => {
+						if (res.confirm) {
+							await this.$http.post('/users/addmeal',this.getAll,{token:true})
+							this.goods.forEach((good) => {
+								good.foods.forEach((food) => {
+									if(food.count !==0){
+										food.count = 0;
+									}
+								})
+							})
+							uni.switchTab({
+								url: '/pages/consume/consume'
+							});
+						}
+						
+					}
+				});
+				
 			},
 			// 解决浮点数 运算出现多位小数
 			accMul(arg1, arg2) {
@@ -213,7 +258,7 @@
 		flex-direction: column;
 		flex: 2;
 		color: #ffffff;
-		margin-right: 30upx;
+		/* margin-right: 30upx; */
 		;
 	}
 

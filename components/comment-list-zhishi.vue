@@ -1,16 +1,16 @@
 <template>
-	<view class="comment-list-zhishi u-f"  @tap="intoZhishi">
+	<view class="comment-list-zhishi u-f"  @tap="intoArticleDetail">
 		<view class="comment-list-zhishi-l u-f1 u-f u-f-jsb u-f-column">
-			<view>{{item.content}}</view>
+			<view>{{zhishiItem.content}}</view>
 			<view class="u-f-ac u-f-jsb l-bottom">
-				<view>{{item.username}}</view>
+				<view>{{zhishiItem.username}}</view>
 				<view class="u-f-ac readnum">
-					<view class="iconfont icon-add-cart"></view>{{item.readnum}}
+					<view class="iconfont icon-good-fill"></view>{{zhishiItem.infonum.dingnum}}
 				</view>
 			</view>
 		</view>
 		<view class="comment-list-zhishi-r">
-			<image :src="item.titlepic" mode="widthFix"></image>
+			<image :src="zhishiItem.titlepic" mode="widthFix"></image>
 		</view>
 	</view>
 </template>
@@ -23,16 +23,18 @@
 		},
 		data() {
 			return {
-
+				zhishiItem:this.item
 			}
 		},
 		methods: {
 			// 进入详情页
-			intoZhishi(){
+			intoArticleDetail(){
+				let item = JSON.parse(JSON.stringify(this.zhishiItem))
+				this.$store.commit('changeArticleContent',item)
 				uni.navigateTo({
-					url:'../comment-article/comment-article'
+					url: "/pages/comment-article/comment-article"
 				})
-				},
+			}
 		}
 	}
 </script>

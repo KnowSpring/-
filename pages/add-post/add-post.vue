@@ -2,11 +2,10 @@
 	<view>
 		<!-- 自定义导航 -->
 		<uni-nav-bar :statusBar="true" rightText="发布" leftIcon="back" @clickLeft="back" @clickRight="post">
-			<view class="u-f-ajc" @tap="privacy">{{barTitle}}
+			<!-- <view class="u-f-ajc" @tap="privacy">{{barTitle}}
 				<view class="icon iconfont icon-add-cart"></view>
-			</view>
-		</uni-nav-bar>
-		<!-- 多行输入栏 -->
+			</view> -->
+		</uni-nav-bar>		<!-- 多行输入栏 -->
 		<view class="uni-textarea">
 			<textarea v-model="textValue" placeholder="说出一句话吧" />
 			</view>
@@ -47,8 +46,6 @@
 				<button type="primary" @tap="hidePopup">我知道了</button>
 			</view>
 		</uni-popup>
-		
-
 	</view>
 </template>
 
@@ -78,6 +75,8 @@
 				barTitle:'所有人可见',
 				textValue:'',//文本域值
 				imageList: [],
+				titlepic:'',
+				morepic:[],
 				sourceTypeIndex: 2,
 				sourceType: ['拍照', '相册', '拍照或相册'],
 				sizeTypeIndex: 2,
@@ -85,7 +84,8 @@
 				countIndex: 8,
 				count: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 				showpopup:true ,//默认打开弹出框
-				isget: false //标识返回
+				isget: false, //标识返回
+				isfirstImg:true //判断多图上传还是单图上传
 				}
 		},
 		onBackPress(){
@@ -95,6 +95,18 @@
 				this.saveDraft()	
 			}
 			return true;
+		},
+		onShow(){
+			let postValue = uni.getStorageSync('postValue')
+			console.log(postValue)
+			if(postValue){
+				this.isget = postValue.isget||false
+				this.isfirstImg= postValue.isfirstImg||true
+				this.imageList= postValue.imageList||[]
+				this.textValue= postValue.textValue||''
+				this.titlepic= postValue.titlepic||''
+				this.morepic= postValue.morepic||[]
+			}
 		},
 		methods: {
 			// 返回
@@ -113,8 +125,18 @@
 					success: res => {
 						if(res.confirm){
 							console.log("保存")
+							let postValue = {
+								'isget':this.isget,
+								'isfirstImg':this.isfirstImg,
+								'imageList':this.imageList,
+								'textValue':this.textValue,
+								'titlepic':this.titlepic,
+								'morepic':this.morepic
+							}
+							uni.setStorageSync('postValue',postValue)
 						}else{
 							console.log("不保存")
+							uni.removeStorageSync('postValue')
 						}
 						this.isget = true;
 						// uni.navigateBack({
@@ -126,7 +148,49 @@
 					}
 				});
 			},
-			post() {},
+			// 提交
+			async post() {
+				 if(this.textValue===''&&this.titlepic ===''){
+					 uni.showToast({
+					 	title:'请填写内容！',
+						icon:'none'
+					 })
+					 return;
+				 }
+				 let morepic = JSON.stringify(this.morepic)
+				let params = {
+					user_id: this.$store.state.userinfo.currentid,
+					title: this.textValue,
+					titlepic: this.titlepic,
+					morepic:morepic,
+					infonum:{commentDo:0,dingnum:0,cainum:0}
+				}
+				let [err,res] = await this.$http.post('/posts/createpost',params,{token:true})
+				uni.showToast({
+					title:res.data.msg
+				})
+				// 初始化状态
+				this.isget = false
+				this.isfirstImg=true
+				this.imageList= []
+				this.textValue=''
+				this.titlepic=''
+				this.morepic=[]
+				//添加到分享模块
+				params.id = res.data.insertId
+				params.isguanzhu = true;
+				params.type = "newpost";
+				params.username = this.$store.state.userinfo.username;
+				params.userpic = this.$store.state.userinfo.userpic;
+				params.creat_time = Date.now();
+				if(res.data.success){
+					uni.$emit('updatePostData',params)
+					uni.navigateBack({
+						delta:1
+					})
+				}
+				
+			},
 			// 设值可看隐私
 			privacy(){
 				uni.showActionSheet({
@@ -146,19 +210,11 @@
 					sourceType: sourceType[this.sourceTypeIndex],
 					sizeType: sizeType[this.sizeTypeIndex],
 					count: this.imageList.length + this.count[this.countIndex] > 9 ? 9 - this.imageList.length : this.count[this.countIndex],
-					// success: (res) => {
-					// 	console.log(res)
-					// 	// res.tempFiles用于上传
-					// 	// this.imageList = this.imageList.concat(res.tempFilePaths);
-					// 	this.$emit('uploud',this.imageList)封装成组件子传父数据
-						
-					// },
 					 success: (res) => {
-						 console.log(res)
 						 this.imageList = this.imageList.concat(res.tempFilePaths);
-							this.imageList.map((item,index)=>{
+							res.tempFilePaths.map((item,index)=>{
 								uni.uploadFile({
-								url: 'http://localhost:5000/api/posts/images', //仅为示例，非真实的接口地
+								url: 'http://localhost:5000/api/posts/images', //上传图片的接口
 								name: 'file',
 								filePath:item,
 								formData: {
@@ -166,7 +222,17 @@
 								},
 								success: (res) => {
 									// 保存每次返回的地址
-									console.log(res);
+									// 先判断是否多图
+									if(res.statusCode === 200&&(!this.isfirstImg)){
+										this.morepic.push(res.imgpath)
+									}
+									if(res.statusCode === 200&&this.isfirstImg){
+										let data = JSON.parse(res.data)
+										this.titlepic = data.imgpath
+										this.morepic.push(data.imgpath)
+										this.isfirstImg  = false;
+									}
+									
 								}
 							});
 						})
